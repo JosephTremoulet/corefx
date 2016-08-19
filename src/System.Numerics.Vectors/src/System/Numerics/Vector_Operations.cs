@@ -137,6 +137,7 @@ namespace System.Numerics
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
         public static bool EqualsAny<T>(Vector<T> left, Vector<T> right) where T : struct
         {
+            // TODO: implement these any/all operators directly when not accelerated
             return !Vector<T>.Equals(left, right).Equals(Vector<T>.Zero);
         }
         #endregion Equals methods
