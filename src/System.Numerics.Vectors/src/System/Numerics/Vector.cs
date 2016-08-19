@@ -45,6 +45,16 @@ namespace System.Numerics
         private double _double;
         #endregion Fields
 
+        private Vector(double d, bool dummy) : this()
+        {
+            _double = d;
+        }
+
+        private Vector(ulong u, bool dummy) : this()
+        {
+            _ulong = u;
+        }
+
         [MethodImpl(MethodImplOptions.NoInlining)]
         private static void throwNotSupported()
         {
@@ -699,82 +709,82 @@ namespace System.Numerics
                 {
                     ulong left_ulong;
                     ulong right_ulong;
-                    Vector<T> sum = new Vector<T>();
                     if (typeof(T) == typeof(Byte))
                     {
                         left_ulong = left._ulong;
                         right_ulong = right._ulong;
-                        sum._ulong = (((left_ulong & 0x00000000000000ffUL) + (right_ulong & 0x00000000000000ffUL)) & 0x00000000000000ffUL)
+                        return new Vector<T>( (((left_ulong & 0x00000000000000ffUL) + (right_ulong & 0x00000000000000ffUL)) & 0x00000000000000ffUL)
                                    | (((left_ulong & 0x000000000000ff00UL) + (right_ulong & 0x000000000000ff00UL)) & 0x000000000000ff00UL)
                                    | (((left_ulong & 0x0000000000ff0000UL) + (right_ulong & 0x0000000000ff0000UL)) & 0x0000000000ff0000UL)
                                    | (((left_ulong & 0x00000000ff000000UL) + (right_ulong & 0x00000000ff000000UL)) & 0x00000000ff000000UL)
                                    | (((left_ulong & 0x000000ff00000000UL) + (right_ulong & 0x000000ff00000000UL)) & 0x000000ff00000000UL)
                                    | (((left_ulong & 0x0000ff0000000000UL) + (right_ulong & 0x0000ff0000000000UL)) & 0x0000ff0000000000UL)
                                    | (((left_ulong & 0x00ff000000000000UL) + (right_ulong & 0x00ff000000000000UL)) & 0x00ff000000000000UL)
-                                   | (((left_ulong & 0xff00000000000000UL) + (right_ulong & 0xff00000000000000UL)) & 0xff00000000000000UL);
+                                   | (((left_ulong & 0xff00000000000000UL) + (right_ulong & 0xff00000000000000UL)) & 0xff00000000000000UL), true);
                     }
                     else if (typeof(T) == typeof(SByte))
                     {
                         left_ulong = left._ulong;
                         right_ulong = right._ulong;
-                        sum._ulong = (((left_ulong & 0x00000000000000ffUL) + (right_ulong & 0x00000000000000ffUL)) & 0x00000000000000ffUL)
+                        return new Vector<T>((((left_ulong & 0x00000000000000ffUL) + (right_ulong & 0x00000000000000ffUL)) & 0x00000000000000ffUL)
                                    | (((left_ulong & 0x000000000000ff00UL) + (right_ulong & 0x000000000000ff00UL)) & 0x000000000000ff00UL)
                                    | (((left_ulong & 0x0000000000ff0000UL) + (right_ulong & 0x0000000000ff0000UL)) & 0x0000000000ff0000UL)
                                    | (((left_ulong & 0x00000000ff000000UL) + (right_ulong & 0x00000000ff000000UL)) & 0x00000000ff000000UL)
                                    | (((left_ulong & 0x000000ff00000000UL) + (right_ulong & 0x000000ff00000000UL)) & 0x000000ff00000000UL)
                                    | (((left_ulong & 0x0000ff0000000000UL) + (right_ulong & 0x0000ff0000000000UL)) & 0x0000ff0000000000UL)
                                    | (((left_ulong & 0x00ff000000000000UL) + (right_ulong & 0x00ff000000000000UL)) & 0x00ff000000000000UL)
-                                   | (((left_ulong & 0xff00000000000000UL) + (right_ulong & 0xff00000000000000UL)) & 0xff00000000000000UL);
+                                   | (((left_ulong & 0xff00000000000000UL) + (right_ulong & 0xff00000000000000UL)) & 0xff00000000000000UL), true);
                     }
                     else if (typeof(T) == typeof(UInt16))
                     {
                         left_ulong = left._ulong;
                         right_ulong = right._ulong;
-                        sum._ulong = (((left_ulong & 0x000000000000ffffUL) + (right_ulong & 0x000000000000ffffUL)) & 0x000000000000ffffUL)
+                        return new Vector<T>((((left_ulong & 0x000000000000ffffUL) + (right_ulong & 0x000000000000ffffUL)) & 0x000000000000ffffUL)
                                    | (((left_ulong & 0x00000000ffff0000UL) + (right_ulong & 0x00000000ffff0000UL)) & 0x00000000ffff0000UL)
                                    | (((left_ulong & 0x0000ffff00000000UL) + (right_ulong & 0x0000ffff00000000UL)) & 0x0000ffff00000000UL)
-                                   | (((left_ulong & 0xffff000000000000UL) + (right_ulong & 0xffff000000000000UL)) & 0xffff000000000000UL);
+                                   | (((left_ulong & 0xffff000000000000UL) + (right_ulong & 0xffff000000000000UL)) & 0xffff000000000000UL), true);
                     }
                     else if (typeof(T) == typeof(Int16))
                     {
                         left_ulong = left._ulong;
                         right_ulong = right._ulong;
-                        sum._ulong = (((left_ulong & 0x000000000000ffffUL) + (right_ulong & 0x000000000000ffffUL)) & 0x000000000000ffffUL)
+                        return new Vector<T>((((left_ulong & 0x000000000000ffffUL) + (right_ulong & 0x000000000000ffffUL)) & 0x000000000000ffffUL)
                                    | (((left_ulong & 0x00000000ffff0000UL) + (right_ulong & 0x00000000ffff0000UL)) & 0x00000000ffff0000UL)
                                    | (((left_ulong & 0x0000ffff00000000UL) + (right_ulong & 0x0000ffff00000000UL)) & 0x0000ffff00000000UL)
-                                   | (((left_ulong & 0xffff000000000000UL) + (right_ulong & 0xffff000000000000UL)) & 0xffff000000000000UL);
+                                   | (((left_ulong & 0xffff000000000000UL) + (right_ulong & 0xffff000000000000UL)) & 0xffff000000000000UL), true);
                     }
                     else if (typeof(T) == typeof(UInt32))
                     {
                         left_ulong = left._ulong;
                         right_ulong = right._ulong;
-                        sum._ulong = (((left_ulong & 0x00000000ffffffffUL) + (right_ulong & 0x00000000ffffffffUL)) & 0x00000000ffffffffUL)
-                                   | (((left_ulong & 0xffffffff00000000UL) + (right_ulong & 0xffffffff00000000UL)) & 0xffffffff00000000UL);
+                        return new Vector<T>((((left_ulong & 0x00000000ffffffffUL) + (right_ulong & 0x00000000ffffffffUL)) & 0x00000000ffffffffUL)
+                                   | (((left_ulong & 0xffffffff00000000UL) + (right_ulong & 0xffffffff00000000UL)) & 0xffffffff00000000UL), true);
                     }
                     else if (typeof(T) == typeof(Int32))
                     {
                         left_ulong = left._ulong;
                         right_ulong = right._ulong;
-                        sum._ulong = (((left_ulong & 0x00000000ffffffffUL) + (right_ulong & 0x00000000ffffffffUL)) & 0x00000000ffffffffUL)
-                                   | (((left_ulong & 0xffffffff00000000UL) + (right_ulong & 0xffffffff00000000UL)) & 0xffffffff00000000UL);
+                        return new Vector<T>((((left_ulong & 0x00000000ffffffffUL) + (right_ulong & 0x00000000ffffffffUL)) & 0x00000000ffffffffUL)
+                                   | (((left_ulong & 0xffffffff00000000UL) + (right_ulong & 0xffffffff00000000UL)) & 0xffffffff00000000UL), true);
                     }
                     else if (typeof(T) == typeof(UInt64))
                     {
-                        sum._ulong = left._ulong + right._ulong;
+                        return new Vector<T>(left._ulong + right._ulong, true);
                     }
                     else if (typeof(T) == typeof(Int64))
                     {
-                        sum._ulong = left._ulong + right._ulong;
+                        return new Vector<T>(left._ulong + right._ulong, true);
                     }
                     else if (typeof(T) == typeof(Single))
                     {
                         throwNotYetImplemented();
+                        return new Vector<T>();
                     }
                     else if (typeof(T) == typeof(Double))
                     {
-                        sum._double = left._double + right._double;
+                        return new Vector<T>(left._double + right._double, true);
                     }
-                    return sum;
+                    return new Vector<T>();
                 }
             }
         }
@@ -798,82 +808,82 @@ namespace System.Numerics
                 {
                     ulong left_ulong;
                     ulong right_ulong;
-                    Vector<T> difference = new Vector<T>();
                     if (typeof(T) == typeof(Byte))
                     {
                         left_ulong = left._ulong;
                         right_ulong = right._ulong;
-                        difference._ulong = (((left_ulong & 0x00000000000000ffUL) - (right_ulong & 0x00000000000000ffUL)) & 0x00000000000000ffUL)
+                        return new Vector<T>((((left_ulong & 0x00000000000000ffUL) - (right_ulong & 0x00000000000000ffUL)) & 0x00000000000000ffUL)
                                           | (((left_ulong & 0x000000000000ff00UL) - (right_ulong & 0x000000000000ff00UL)) & 0x000000000000ff00UL)
                                           | (((left_ulong & 0x0000000000ff0000UL) - (right_ulong & 0x0000000000ff0000UL)) & 0x0000000000ff0000UL)
                                           | (((left_ulong & 0x00000000ff000000UL) - (right_ulong & 0x00000000ff000000UL)) & 0x00000000ff000000UL)
                                           | (((left_ulong & 0x000000ff00000000UL) - (right_ulong & 0x000000ff00000000UL)) & 0x000000ff00000000UL)
                                           | (((left_ulong & 0x0000ff0000000000UL) - (right_ulong & 0x0000ff0000000000UL)) & 0x0000ff0000000000UL)
                                           | (((left_ulong & 0x00ff000000000000UL) - (right_ulong & 0x00ff000000000000UL)) & 0x00ff000000000000UL)
-                                          | (((left_ulong & 0xff00000000000000UL) - (right_ulong & 0xff00000000000000UL)) & 0xff00000000000000UL);
+                                          | (((left_ulong & 0xff00000000000000UL) - (right_ulong & 0xff00000000000000UL)) & 0xff00000000000000UL), true);
                     }
                     else if (typeof(T) == typeof(SByte))
                     {
                         left_ulong = left._ulong;
                         right_ulong = right._ulong;
-                        difference._ulong = (((left_ulong & 0x00000000000000ffUL) - (right_ulong & 0x00000000000000ffUL)) & 0x00000000000000ffUL)
+                        return new Vector<T>((((left_ulong & 0x00000000000000ffUL) - (right_ulong & 0x00000000000000ffUL)) & 0x00000000000000ffUL)
                                           | (((left_ulong & 0x000000000000ff00UL) - (right_ulong & 0x000000000000ff00UL)) & 0x000000000000ff00UL)
                                           | (((left_ulong & 0x0000000000ff0000UL) - (right_ulong & 0x0000000000ff0000UL)) & 0x0000000000ff0000UL)
                                           | (((left_ulong & 0x00000000ff000000UL) - (right_ulong & 0x00000000ff000000UL)) & 0x00000000ff000000UL)
                                           | (((left_ulong & 0x000000ff00000000UL) - (right_ulong & 0x000000ff00000000UL)) & 0x000000ff00000000UL)
                                           | (((left_ulong & 0x0000ff0000000000UL) - (right_ulong & 0x0000ff0000000000UL)) & 0x0000ff0000000000UL)
                                           | (((left_ulong & 0x00ff000000000000UL) - (right_ulong & 0x00ff000000000000UL)) & 0x00ff000000000000UL)
-                                          | (((left_ulong & 0xff00000000000000UL) - (right_ulong & 0xff00000000000000UL)) & 0xff00000000000000UL);
+                                          | (((left_ulong & 0xff00000000000000UL) - (right_ulong & 0xff00000000000000UL)) & 0xff00000000000000UL), true);
                     }
                     else if (typeof(T) == typeof(UInt16))
                     {
                         left_ulong = left._ulong;
                         right_ulong = right._ulong;
-                        difference._ulong = (((left_ulong & 0x000000000000ffffUL) - (right_ulong & 0x000000000000ffffUL)) & 0x000000000000ffffUL)
+                        return new Vector<T>((((left_ulong & 0x000000000000ffffUL) - (right_ulong & 0x000000000000ffffUL)) & 0x000000000000ffffUL)
                                           | (((left_ulong & 0x00000000ffff0000UL) - (right_ulong & 0x00000000ffff0000UL)) & 0x00000000ffff0000UL)
                                           | (((left_ulong & 0x0000ffff00000000UL) - (right_ulong & 0x0000ffff00000000UL)) & 0x0000ffff00000000UL)
-                                          | (((left_ulong & 0xffff000000000000UL) - (right_ulong & 0xffff000000000000UL)) & 0xffff000000000000UL);
+                                          | (((left_ulong & 0xffff000000000000UL) - (right_ulong & 0xffff000000000000UL)) & 0xffff000000000000UL), true);
                     }
                     else if (typeof(T) == typeof(Int16))
                     {
                         left_ulong = left._ulong;
                         right_ulong = right._ulong;
-                        difference._ulong = (((left_ulong & 0x000000000000ffffUL) - (right_ulong & 0x000000000000ffffUL)) & 0x000000000000ffffUL)
+                        return new Vector<T>((((left_ulong & 0x000000000000ffffUL) - (right_ulong & 0x000000000000ffffUL)) & 0x000000000000ffffUL)
                                           | (((left_ulong & 0x00000000ffff0000UL) - (right_ulong & 0x00000000ffff0000UL)) & 0x00000000ffff0000UL)
                                           | (((left_ulong & 0x0000ffff00000000UL) - (right_ulong & 0x0000ffff00000000UL)) & 0x0000ffff00000000UL)
-                                          | (((left_ulong & 0xffff000000000000UL) - (right_ulong & 0xffff000000000000UL)) & 0xffff000000000000UL);
+                                          | (((left_ulong & 0xffff000000000000UL) - (right_ulong & 0xffff000000000000UL)) & 0xffff000000000000UL), true);
                     }
                     else if (typeof(T) == typeof(UInt32))
                     {
                         left_ulong = left._ulong;
                         right_ulong = right._ulong;
-                        difference._ulong = (((left_ulong & 0x00000000ffffffffUL) - (right_ulong & 0x00000000ffffffffUL)) & 0x00000000ffffffffUL)
-                                          | (((left_ulong & 0xffffffff00000000UL) - (right_ulong & 0xffffffff00000000UL)) & 0xffffffff00000000UL);
+                        return new Vector<T>((((left_ulong & 0x00000000ffffffffUL) - (right_ulong & 0x00000000ffffffffUL)) & 0x00000000ffffffffUL)
+                                          | (((left_ulong & 0xffffffff00000000UL) - (right_ulong & 0xffffffff00000000UL)) & 0xffffffff00000000UL), true);
                     }
                     else if (typeof(T) == typeof(Int32))
                     {
                         left_ulong = left._ulong;
                         right_ulong = right._ulong;
-                        difference._ulong = (((left_ulong & 0x00000000ffffffffUL) - (right_ulong & 0x00000000ffffffffUL)) & 0x00000000ffffffffUL)
-                                          | (((left_ulong & 0xffffffff00000000UL) - (right_ulong & 0xffffffff00000000UL)) & 0xffffffff00000000UL);
+                        return new Vector<T>((((left_ulong & 0x00000000ffffffffUL) - (right_ulong & 0x00000000ffffffffUL)) & 0x00000000ffffffffUL)
+                                          | (((left_ulong & 0xffffffff00000000UL) - (right_ulong & 0xffffffff00000000UL)) & 0xffffffff00000000UL), true);
                     }
                     else if (typeof(T) == typeof(UInt64))
                     {
-                        difference._ulong = left._ulong - right._ulong;
+                        return new Vector<T>(left._ulong - right._ulong, true);
                     }
                     else if (typeof(T) == typeof(Int64))
                     {
-                        difference._ulong = left._ulong - right._ulong;
+                        return new Vector<T>(left._ulong - right._ulong, true);
                     }
                     else if (typeof(T) == typeof(Single))
                     {
                         throwNotYetImplemented();
+                        return new Vector<T>();
                     }
                     else if (typeof(T) == typeof(Double))
                     {
-                        difference._double = left._double - right._double;
+                        return new Vector<T>(left._double - right._double, true);
                     }
-                    return difference;
+                    return new Vector<T>();
                 }
             }
         }
@@ -898,82 +908,82 @@ namespace System.Numerics
                 {
                     ulong left_ulong;
                     ulong right_ulong;
-                    Vector<T> product = new Vector<T>();
                     if (typeof(T) == typeof(Byte))
                     {
                         left_ulong = left._ulong;
                         right_ulong = right._ulong;
-                        product._ulong = (((left_ulong & 0x00000000000000ffUL) * (right_ulong & 0x00000000000000ffUL)) & 0x00000000000000ffUL)
+                        return new Vector<T>((((left_ulong & 0x00000000000000ffUL) * (right_ulong & 0x00000000000000ffUL)) & 0x00000000000000ffUL)
                                        | (((left_ulong & 0x000000000000ff00UL) * (right_ulong & 0x000000000000ff00UL)) & 0x000000000000ff00UL)
                                        | (((left_ulong & 0x0000000000ff0000UL) * (right_ulong & 0x0000000000ff0000UL)) & 0x0000000000ff0000UL)
                                        | (((left_ulong & 0x00000000ff000000UL) * (right_ulong & 0x00000000ff000000UL)) & 0x00000000ff000000UL)
                                        | (((left_ulong & 0x000000ff00000000UL) * (right_ulong & 0x000000ff00000000UL)) & 0x000000ff00000000UL)
                                        | (((left_ulong & 0x0000ff0000000000UL) * (right_ulong & 0x0000ff0000000000UL)) & 0x0000ff0000000000UL)
                                        | (((left_ulong & 0x00ff000000000000UL) * (right_ulong & 0x00ff000000000000UL)) & 0x00ff000000000000UL)
-                                       | (((left_ulong & 0xff00000000000000UL) * (right_ulong & 0xff00000000000000UL)) & 0xff00000000000000UL);
+                                       | (((left_ulong & 0xff00000000000000UL) * (right_ulong & 0xff00000000000000UL)) & 0xff00000000000000UL), true);
                     }
                     else if (typeof(T) == typeof(SByte))
                     {
                         left_ulong = left._ulong;
                         right_ulong = right._ulong;
-                        product._ulong = (((left_ulong & 0x00000000000000ffUL) * (right_ulong & 0x00000000000000ffUL)) & 0x00000000000000ffUL)
+                        return new Vector<T>((((left_ulong & 0x00000000000000ffUL) * (right_ulong & 0x00000000000000ffUL)) & 0x00000000000000ffUL)
                                        | (((left_ulong & 0x000000000000ff00UL) * (right_ulong & 0x000000000000ff00UL)) & 0x000000000000ff00UL)
                                        | (((left_ulong & 0x0000000000ff0000UL) * (right_ulong & 0x0000000000ff0000UL)) & 0x0000000000ff0000UL)
                                        | (((left_ulong & 0x00000000ff000000UL) * (right_ulong & 0x00000000ff000000UL)) & 0x00000000ff000000UL)
                                        | (((left_ulong & 0x000000ff00000000UL) * (right_ulong & 0x000000ff00000000UL)) & 0x000000ff00000000UL)
                                        | (((left_ulong & 0x0000ff0000000000UL) * (right_ulong & 0x0000ff0000000000UL)) & 0x0000ff0000000000UL)
                                        | (((left_ulong & 0x00ff000000000000UL) * (right_ulong & 0x00ff000000000000UL)) & 0x00ff000000000000UL)
-                                       | (((left_ulong & 0xff00000000000000UL) * (right_ulong & 0xff00000000000000UL)) & 0xff00000000000000UL);
+                                       | (((left_ulong & 0xff00000000000000UL) * (right_ulong & 0xff00000000000000UL)) & 0xff00000000000000UL), true);
                     }
                     else if (typeof(T) == typeof(UInt16))
                     {
                         left_ulong = left._ulong;
                         right_ulong = right._ulong;
-                        product._ulong = (((left_ulong & 0x000000000000ffffUL) * (right_ulong & 0x000000000000ffffUL)) & 0x000000000000ffffUL)
+                        return new Vector<T>((((left_ulong & 0x000000000000ffffUL) * (right_ulong & 0x000000000000ffffUL)) & 0x000000000000ffffUL)
                                        | (((left_ulong & 0x00000000ffff0000UL) * (right_ulong & 0x00000000ffff0000UL)) & 0x00000000ffff0000UL)
                                        | (((left_ulong & 0x0000ffff00000000UL) * (right_ulong & 0x0000ffff00000000UL)) & 0x0000ffff00000000UL)
-                                       | (((left_ulong & 0xffff000000000000UL) * (right_ulong & 0xffff000000000000UL)) & 0xffff000000000000UL);
+                                       | (((left_ulong & 0xffff000000000000UL) * (right_ulong & 0xffff000000000000UL)) & 0xffff000000000000UL), true);
                     }
                     else if (typeof(T) == typeof(Int16))
                     {
                         left_ulong = left._ulong;
                         right_ulong = right._ulong;
-                        product._ulong = (((left_ulong & 0x000000000000ffffUL) * (right_ulong & 0x000000000000ffffUL)) & 0x000000000000ffffUL)
+                        return new Vector<T>((((left_ulong & 0x000000000000ffffUL) * (right_ulong & 0x000000000000ffffUL)) & 0x000000000000ffffUL)
                                        | (((left_ulong & 0x00000000ffff0000UL) * (right_ulong & 0x00000000ffff0000UL)) & 0x00000000ffff0000UL)
                                        | (((left_ulong & 0x0000ffff00000000UL) * (right_ulong & 0x0000ffff00000000UL)) & 0x0000ffff00000000UL)
-                                       | (((left_ulong & 0xffff000000000000UL) * (right_ulong & 0xffff000000000000UL)) & 0xffff000000000000UL);
+                                       | (((left_ulong & 0xffff000000000000UL) * (right_ulong & 0xffff000000000000UL)) & 0xffff000000000000UL), true);
                     }
                     else if (typeof(T) == typeof(UInt32))
                     {
                         left_ulong = left._ulong;
                         right_ulong = right._ulong;
-                        product._ulong = (((left_ulong & 0x00000000ffffffffUL) * (right_ulong & 0x00000000ffffffffUL)) & 0x00000000ffffffffUL)
-                                       | (((left_ulong & 0xffffffff00000000UL) * (right_ulong & 0xffffffff00000000UL)) & 0xffffffff00000000UL);
+                        return new Vector<T>((((left_ulong & 0x00000000ffffffffUL) * (right_ulong & 0x00000000ffffffffUL)) & 0x00000000ffffffffUL)
+                                       | (((left_ulong & 0xffffffff00000000UL) * (right_ulong & 0xffffffff00000000UL)) & 0xffffffff00000000UL), true);
                     }
                     else if (typeof(T) == typeof(Int32))
                     {
                         left_ulong = left._ulong;
                         right_ulong = right._ulong;
-                        product._ulong = (((left_ulong & 0x00000000ffffffffUL) * (right_ulong & 0x00000000ffffffffUL)) & 0x00000000ffffffffUL)
-                                       | (((left_ulong & 0xffffffff00000000UL) * (right_ulong & 0xffffffff00000000UL)) & 0xffffffff00000000UL);
+                        return new Vector<T>((((left_ulong & 0x00000000ffffffffUL) * (right_ulong & 0x00000000ffffffffUL)) & 0x00000000ffffffffUL)
+                                       | (((left_ulong & 0xffffffff00000000UL) * (right_ulong & 0xffffffff00000000UL)) & 0xffffffff00000000UL), true);
                     }
                     else if (typeof(T) == typeof(UInt64))
                     {
-                        product._ulong = left._ulong * right._ulong;
+                        return new Vector<T>(left._ulong * right._ulong, true);
                     }
                     else if (typeof(T) == typeof(Int64))
                     {
-                        product._ulong = left._ulong * right._ulong;
+                        return new Vector<T>(left._ulong * right._ulong, true);
                     }
                     else if (typeof(T) == typeof(Single))
                     {
                         throwNotYetImplemented();
+                        return new Vector<T>();
                     }
                     else if (typeof(T) == typeof(Double))
                     {
-                        product._double = left._double * right._double;
+                        return new Vector<T>(left._double * right._double, true);
                     }
-                    return product;
+                    return new Vector<T>();
                 }
             }
         }
@@ -1011,82 +1021,82 @@ namespace System.Numerics
                 {
                     ulong value_ulong;
                     ulong factor_ulong;
-                    Vector<T> product = new Vector<T>();
                     if (typeof(T) == typeof(Byte))
                     {
                         value_ulong = value._ulong;
                         factor_ulong = (ulong)(Byte)(object)factor;
-                        product._ulong = (((value_ulong & 0x00000000000000ffUL) * (factor_ulong << 00)) & 0x00000000000000ffUL)
+                        return new Vector<T>((((value_ulong & 0x00000000000000ffUL) * (factor_ulong << 00)) & 0x00000000000000ffUL)
                                        | (((value_ulong & 0x000000000000ff00UL) * (factor_ulong << 08)) & 0x000000000000ff00UL)
                                        | (((value_ulong & 0x0000000000ff0000UL) * (factor_ulong << 16)) & 0x0000000000ff0000UL)
                                        | (((value_ulong & 0x00000000ff000000UL) * (factor_ulong << 24)) & 0x00000000ff000000UL)
                                        | (((value_ulong & 0x000000ff00000000UL) * (factor_ulong << 32)) & 0x000000ff00000000UL)
                                        | (((value_ulong & 0x0000ff0000000000UL) * (factor_ulong << 40)) & 0x0000ff0000000000UL)
                                        | (((value_ulong & 0x00ff000000000000UL) * (factor_ulong << 48)) & 0x00ff000000000000UL)
-                                       | (((value_ulong & 0xff00000000000000UL) * (factor_ulong << 56)) & 0xff00000000000000UL);
+                                       | (((value_ulong & 0xff00000000000000UL) * (factor_ulong << 56)) & 0xff00000000000000UL), true);
                     }
                     else if (typeof(T) == typeof(SByte))
                     {
                         value_ulong = value._ulong;
                         factor_ulong = (ulong)(byte)(SByte)(object)factor;
-                        product._ulong = (((value_ulong & 0x00000000000000ffUL) * (factor_ulong << 00)) & 0x00000000000000ffUL)
+                        return new Vector<T>((((value_ulong & 0x00000000000000ffUL) * (factor_ulong << 00)) & 0x00000000000000ffUL)
                                        | (((value_ulong & 0x000000000000ff00UL) * (factor_ulong << 08)) & 0x000000000000ff00UL)
                                        | (((value_ulong & 0x0000000000ff0000UL) * (factor_ulong << 16)) & 0x0000000000ff0000UL)
                                        | (((value_ulong & 0x00000000ff000000UL) * (factor_ulong << 24)) & 0x00000000ff000000UL)
                                        | (((value_ulong & 0x000000ff00000000UL) * (factor_ulong << 32)) & 0x000000ff00000000UL)
                                        | (((value_ulong & 0x0000ff0000000000UL) * (factor_ulong << 40)) & 0x0000ff0000000000UL)
                                        | (((value_ulong & 0x00ff000000000000UL) * (factor_ulong << 48)) & 0x00ff000000000000UL)
-                                       | (((value_ulong & 0xff00000000000000UL) * (factor_ulong << 56)) & 0xff00000000000000UL);
+                                       | (((value_ulong & 0xff00000000000000UL) * (factor_ulong << 56)) & 0xff00000000000000UL), true);
                     }
                     else if (typeof(T) == typeof(UInt16))
                     {
                         value_ulong = value._ulong;
                         factor_ulong = (ulong)(UInt16)(object)factor;
-                        product._ulong = (((value_ulong & 0x000000000000ffffUL) * (factor_ulong << 00)) & 0x000000000000ffffUL)
+                        return new Vector<T>((((value_ulong & 0x000000000000ffffUL) * (factor_ulong << 00)) & 0x000000000000ffffUL)
                                        | (((value_ulong & 0x00000000ffff0000UL) * (factor_ulong << 16)) & 0x00000000ffff0000UL)
                                        | (((value_ulong & 0x0000ffff00000000UL) * (factor_ulong << 32)) & 0x0000ffff00000000UL)
-                                       | (((value_ulong & 0xffff000000000000UL) * (factor_ulong << 48)) & 0xffff000000000000UL);
+                                       | (((value_ulong & 0xffff000000000000UL) * (factor_ulong << 48)) & 0xffff000000000000UL), true);
                     }
                     else if (typeof(T) == typeof(Int16))
                     {
                         value_ulong = value._ulong;
                         factor_ulong = (ulong)(ushort)(Int16)(object)factor;
-                        product._ulong = (((value_ulong & 0x000000000000ffffUL) * (factor_ulong << 00)) & 0x000000000000ffffUL)
+                        return new Vector<T>((((value_ulong & 0x000000000000ffffUL) * (factor_ulong << 00)) & 0x000000000000ffffUL)
                                        | (((value_ulong & 0x00000000ffff0000UL) * (factor_ulong << 16)) & 0x00000000ffff0000UL)
                                        | (((value_ulong & 0x0000ffff00000000UL) * (factor_ulong << 32)) & 0x0000ffff00000000UL)
-                                       | (((value_ulong & 0xffff000000000000UL) * (factor_ulong << 48)) & 0xffff000000000000UL);
+                                       | (((value_ulong & 0xffff000000000000UL) * (factor_ulong << 48)) & 0xffff000000000000UL), true);
                     }
                     else if (typeof(T) == typeof(UInt32))
                     {
                         value_ulong = value._ulong;
                         factor_ulong = (ulong)(UInt32)(object)factor;
-                        product._ulong = (((value_ulong & 0x000000000000ffffUL) * (factor_ulong << 00)) & 0x00000000ffffffffUL)
-                                       | (((value_ulong & 0x0000ffff00000000UL) * (factor_ulong << 32)) & 0xffffffff00000000UL);
+                        return new Vector<T>((((value_ulong & 0x000000000000ffffUL) * (factor_ulong << 00)) & 0x00000000ffffffffUL)
+                                       | (((value_ulong & 0x0000ffff00000000UL) * (factor_ulong << 32)) & 0xffffffff00000000UL), true);
                     }
                     else if (typeof(T) == typeof(Int32))
                     {
                         value_ulong = value._ulong;
                         factor_ulong = (ulong)(uint)(Int32)(object)factor;
-                        product._ulong = (((value_ulong & 0x000000000000ffffUL) * (factor_ulong << 00)) & 0x00000000ffffffffUL)
-                                       | (((value_ulong & 0x0000ffff00000000UL) * (factor_ulong << 32)) & 0xffffffff00000000UL);
+                        return new Vector<T>((((value_ulong & 0x000000000000ffffUL) * (factor_ulong << 00)) & 0x00000000ffffffffUL)
+                                       | (((value_ulong & 0x0000ffff00000000UL) * (factor_ulong << 32)) & 0xffffffff00000000UL), true);
                     }
                     else if (typeof(T) == typeof(UInt64))
                     {
-                        product._ulong = value._ulong * (UInt64)(object)factor;
+                        return new Vector<T>(value._ulong * (UInt64)(object)factor, true);
                     }
                     else if (typeof(T) == typeof(Int64))
                     {
-                        product._ulong = value._ulong * (ulong)(Int64)(object)factor;
+                        return new Vector<T>(value._ulong * (ulong)(Int64)(object)factor, true);
                     }
                     else if (typeof(T) == typeof(Single))
                     {
                         throwNotYetImplemented();
+                        return new Vector<T>();
                     }
                     else if (typeof(T) == typeof(Double))
                     {
-                        product._double = value._double * (Double)(object)factor;
+                        return new Vector<T>(value._double * (Double)(object)factor, true);
                     }
-                    return product;
+                    return new Vector<T>();
                 }
             }
         }
@@ -1111,82 +1121,82 @@ namespace System.Numerics
                 {
                     ulong left_ulong;
                     ulong right_ulong;
-                    Vector<T> quotient = new Vector<T>();
                     if (typeof(T) == typeof(Byte))
                     {
                         left_ulong = left._ulong;
                         right_ulong = right._ulong;
-                        quotient._ulong = (((left_ulong & 0x00000000000000ffUL) * (right_ulong & 0x00000000000000ffUL)) & 0x00000000000000ffUL)
+                        return new Vector<T>((((left_ulong & 0x00000000000000ffUL) * (right_ulong & 0x00000000000000ffUL)) & 0x00000000000000ffUL)
                                         | (((left_ulong & 0x000000000000ff00UL) * (right_ulong & 0x000000000000ff00UL)) & 0x000000000000ff00UL)
                                         | (((left_ulong & 0x0000000000ff0000UL) * (right_ulong & 0x0000000000ff0000UL)) & 0x0000000000ff0000UL)
                                         | (((left_ulong & 0x00000000ff000000UL) * (right_ulong & 0x00000000ff000000UL)) & 0x00000000ff000000UL)
                                         | (((left_ulong & 0x000000ff00000000UL) * (right_ulong & 0x000000ff00000000UL)) & 0x000000ff00000000UL)
                                         | (((left_ulong & 0x0000ff0000000000UL) * (right_ulong & 0x0000ff0000000000UL)) & 0x0000ff0000000000UL)
                                         | (((left_ulong & 0x00ff000000000000UL) * (right_ulong & 0x00ff000000000000UL)) & 0x00ff000000000000UL)
-                                        | (((left_ulong & 0xff00000000000000UL) * (right_ulong & 0xff00000000000000UL)) & 0xff00000000000000UL);
+                                        | (((left_ulong & 0xff00000000000000UL) * (right_ulong & 0xff00000000000000UL)) & 0xff00000000000000UL), true);
                     }
                     else if (typeof(T) == typeof(SByte))
                     {
                         left_ulong = left._ulong;
                         right_ulong = right._ulong;
-                        quotient._ulong = (((left_ulong & 0x00000000000000ffUL) * (right_ulong & 0x00000000000000ffUL)) & 0x00000000000000ffUL)
+                        return new Vector<T>((((left_ulong & 0x00000000000000ffUL) * (right_ulong & 0x00000000000000ffUL)) & 0x00000000000000ffUL)
                                         | (((left_ulong & 0x000000000000ff00UL) * (right_ulong & 0x000000000000ff00UL)) & 0x000000000000ff00UL)
                                         | (((left_ulong & 0x0000000000ff0000UL) * (right_ulong & 0x0000000000ff0000UL)) & 0x0000000000ff0000UL)
                                         | (((left_ulong & 0x00000000ff000000UL) * (right_ulong & 0x00000000ff000000UL)) & 0x00000000ff000000UL)
                                         | (((left_ulong & 0x000000ff00000000UL) * (right_ulong & 0x000000ff00000000UL)) & 0x000000ff00000000UL)
                                         | (((left_ulong & 0x0000ff0000000000UL) * (right_ulong & 0x0000ff0000000000UL)) & 0x0000ff0000000000UL)
                                         | (((left_ulong & 0x00ff000000000000UL) * (right_ulong & 0x00ff000000000000UL)) & 0x00ff000000000000UL)
-                                        | (((left_ulong & 0xff00000000000000UL) * (right_ulong & 0xff00000000000000UL)) & 0xff00000000000000UL);
+                                        | (((left_ulong & 0xff00000000000000UL) * (right_ulong & 0xff00000000000000UL)) & 0xff00000000000000UL), true);
                     }
                     else if (typeof(T) == typeof(UInt16))
                     {
                         left_ulong = left._ulong;
                         right_ulong = right._ulong;
-                        quotient._ulong = (((left_ulong & 0x000000000000ffffUL) * (right_ulong & 0x000000000000ffffUL)) & 0x000000000000ffffUL)
+                        return new Vector<T>((((left_ulong & 0x000000000000ffffUL) * (right_ulong & 0x000000000000ffffUL)) & 0x000000000000ffffUL)
                                         | (((left_ulong & 0x00000000ffff0000UL) * (right_ulong & 0x00000000ffff0000UL)) & 0x00000000ffff0000UL)
                                         | (((left_ulong & 0x0000ffff00000000UL) * (right_ulong & 0x0000ffff00000000UL)) & 0x0000ffff00000000UL)
-                                        | (((left_ulong & 0xffff000000000000UL) * (right_ulong & 0xffff000000000000UL)) & 0xffff000000000000UL);
+                                        | (((left_ulong & 0xffff000000000000UL) * (right_ulong & 0xffff000000000000UL)) & 0xffff000000000000UL), true);
                     }
                     else if (typeof(T) == typeof(Int16))
                     {
                         left_ulong = left._ulong;
                         right_ulong = right._ulong;
-                        quotient._ulong = (((left_ulong & 0x000000000000ffffUL) * (right_ulong & 0x000000000000ffffUL)) & 0x000000000000ffffUL)
+                        return new Vector<T>((((left_ulong & 0x000000000000ffffUL) * (right_ulong & 0x000000000000ffffUL)) & 0x000000000000ffffUL)
                                         | (((left_ulong & 0x00000000ffff0000UL) * (right_ulong & 0x00000000ffff0000UL)) & 0x00000000ffff0000UL)
                                         | (((left_ulong & 0x0000ffff00000000UL) * (right_ulong & 0x0000ffff00000000UL)) & 0x0000ffff00000000UL)
-                                        | (((left_ulong & 0xffff000000000000UL) * (right_ulong & 0xffff000000000000UL)) & 0xffff000000000000UL);
+                                        | (((left_ulong & 0xffff000000000000UL) * (right_ulong & 0xffff000000000000UL)) & 0xffff000000000000UL), true);
                     }
                     else if (typeof(T) == typeof(UInt32))
                     {
                         left_ulong = left._ulong;
                         right_ulong = right._ulong;
-                        quotient._ulong = (((left_ulong & 0x00000000ffffffffUL) * (right_ulong & 0x00000000ffffffffUL)) & 0x00000000ffffffffUL)
-                                        | (((left_ulong & 0xffffffff00000000UL) * (right_ulong & 0xffffffff00000000UL)) & 0xffffffff00000000UL);
+                        return new Vector<T>((((left_ulong & 0x00000000ffffffffUL) * (right_ulong & 0x00000000ffffffffUL)) & 0x00000000ffffffffUL)
+                                        | (((left_ulong & 0xffffffff00000000UL) * (right_ulong & 0xffffffff00000000UL)) & 0xffffffff00000000UL), true);
                     }
                     else if (typeof(T) == typeof(Int32))
                     {
                         left_ulong = left._ulong;
                         right_ulong = right._ulong;
-                        quotient._ulong = (((left_ulong & 0x00000000ffffffffUL) * (right_ulong & 0x00000000ffffffffUL)) & 0x00000000ffffffffUL)
-                                        | (((left_ulong & 0xffffffff00000000UL) * (right_ulong & 0xffffffff00000000UL)) & 0xffffffff00000000UL);
+                        return new Vector<T>((((left_ulong & 0x00000000ffffffffUL) * (right_ulong & 0x00000000ffffffffUL)) & 0x00000000ffffffffUL)
+                                        | (((left_ulong & 0xffffffff00000000UL) * (right_ulong & 0xffffffff00000000UL)) & 0xffffffff00000000UL), true);
                     }
                     else if (typeof(T) == typeof(UInt64))
                     {
-                        quotient._ulong = left._ulong * right._ulong;
+                        return new Vector<T>(left._ulong * right._ulong, true);
                     }
                     else if (typeof(T) == typeof(Int64))
                     {
-                        quotient._ulong = left._ulong * right._ulong;
+                        return new Vector<T>(left._ulong * right._ulong, true);
                     }
                     else if (typeof(T) == typeof(Single))
                     {
                         throwNotYetImplemented();
+                        return new Vector<T>();
                     }
                     else if (typeof(T) == typeof(Double))
                     {
-                        quotient._double = left._double * right._double;
+                        return new Vector<T>(left._double * right._double, true);
                     }
-                    return quotient;
+                    return new Vector<T>();
                 }
             }
         }
@@ -1214,7 +1224,6 @@ namespace System.Numerics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static unsafe Vector<T> operator &(Vector<T> left, Vector<T> right)
         {
-            Vector<T> result = new Vector<T>();
             unchecked
             {
                 if (Vector.IsHardwareAccelerated)
@@ -1225,20 +1234,20 @@ namespace System.Numerics
                 {
                     if (typeof(T) == typeof(Double))
                     {
-                        result._double = BitConverter.Int64BitsToDouble(BitConverter.DoubleToInt64Bits(left._double) & BitConverter.DoubleToInt64Bits(right._ulong));
+                        return new Vector<T>(BitConverter.Int64BitsToDouble(BitConverter.DoubleToInt64Bits(left._double) & BitConverter.DoubleToInt64Bits(right._ulong)), true);
                     }
                     else if (typeof(T) == typeof(Single))
                     {
                         // throw new System.Exception("NYI: need BitConverter ops for Single");
                         throwNotYetImplemented();
+                        return new Vector<T>();
                     }
                     else
                     {
-                        result._ulong = left._ulong & right._ulong;
+                        return new Vector<T>(left._ulong & right._ulong, true);
                     }
                 }
             }
-            return result;
         }
 
         /// <summary>
@@ -1251,7 +1260,6 @@ namespace System.Numerics
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
         public static unsafe Vector<T> operator |(Vector<T> left, Vector<T> right)
         {
-            Vector<T> result = new Vector<T>();
             unchecked
             {
                 if (Vector.IsHardwareAccelerated)
@@ -1262,20 +1270,20 @@ namespace System.Numerics
                 {
                     if (typeof(T) == typeof(Double))
                     {
-                        result._double = BitConverter.Int64BitsToDouble(BitConverter.DoubleToInt64Bits(left._double) | BitConverter.DoubleToInt64Bits(right._ulong));
+                        return new Vector<T>(BitConverter.Int64BitsToDouble(BitConverter.DoubleToInt64Bits(left._double) | BitConverter.DoubleToInt64Bits(right._ulong)), true);
                     }
                     else if (typeof(T) == typeof(Single))
                     {
                         // throw new System.Exception("NYI: need BitConverter ops for Single");
                         throwNotYetImplemented();
+                        return new Vector<T>();
                     }
                     else
                     {
-                        result._ulong = left._ulong | right._ulong;
+                        return new Vector<T>(left._ulong | right._ulong, true);
                     }
                 }
             }
-            return result;
         }
 
         /// <summary>
@@ -1288,7 +1296,6 @@ namespace System.Numerics
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
         public static unsafe Vector<T> operator ^(Vector<T> left, Vector<T> right)
         {
-            Vector<T> result = new Vector<T>();
             unchecked
             {
                 if (Vector.IsHardwareAccelerated)
@@ -1299,20 +1306,20 @@ namespace System.Numerics
                 {
                     if (typeof(T) == typeof(Double))
                     {
-                        result._double = BitConverter.Int64BitsToDouble(BitConverter.DoubleToInt64Bits(left._double) ^ BitConverter.DoubleToInt64Bits(right._ulong));
+                        return new Vector<T>(BitConverter.Int64BitsToDouble(BitConverter.DoubleToInt64Bits(left._double) ^ BitConverter.DoubleToInt64Bits(right._ulong)), true);
                     }
                     else if (typeof(T) == typeof(Single))
                     {
                         // throw new System.Exception("NYI: need BitConverter ops for Single");
                         throwNotYetImplemented();
+                        return new Vector<T>();
                     }
                     else
                     {
-                        result._ulong = left._ulong ^ right._ulong;
+                        return new Vector<T>(left._ulong ^ right._ulong, true);
                     }
                 }
             }
-            return result;
         }
 
         /// <summary>
@@ -1363,16 +1370,14 @@ namespace System.Numerics
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
         public static explicit operator Vector<Byte>(Vector<T> value)
         {
-            var result = new Vector<Byte>();
             if (typeof(T) == typeof(Double))
             {
-                result._ulong = (ulong)BitConverter.DoubleToInt64Bits(value._double);
+                return new Vector<Byte>((ulong)BitConverter.DoubleToInt64Bits(value._double), true);
             }
             else
             {
-                result._ulong = value._ulong;
+                return new Vector<Byte>(value._ulong, true);
             }
-            return result;
         }
 
         /// <summary>
@@ -1385,16 +1390,14 @@ namespace System.Numerics
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
         public static explicit operator Vector<SByte>(Vector<T> value)
         {
-            var result = new Vector<SByte>();
             if (typeof(T) == typeof(Double))
             {
-                result._ulong = (ulong)BitConverter.DoubleToInt64Bits(value._double);
+                return new Vector<SByte>((ulong)BitConverter.DoubleToInt64Bits(value._double), true);
             }
             else
             {
-                result._ulong = value._ulong;
+                return new Vector<SByte>(value._ulong, true);
             }
-            return result;
         }
 
         /// <summary>
@@ -1407,16 +1410,14 @@ namespace System.Numerics
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
         public static explicit operator Vector<UInt16>(Vector<T> value)
         {
-            var result = new Vector<UInt16>();
             if (typeof(T) == typeof(Double))
             {
-                result._ulong = (ulong)BitConverter.DoubleToInt64Bits(value._double);
+                return new Vector<UInt16>((ulong)BitConverter.DoubleToInt64Bits(value._double), true);
             }
             else
             {
-                result._ulong = value._ulong;
+                return new Vector<UInt16>(value._ulong, true);
             }
-            return result;
         }
 
         /// <summary>
@@ -1428,16 +1429,14 @@ namespace System.Numerics
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
         public static explicit operator Vector<Int16>(Vector<T> value)
         {
-            var result = new Vector<Int16>();
             if (typeof(T) == typeof(Double))
             {
-                result._ulong = (ulong)BitConverter.DoubleToInt64Bits(value._double);
+                return new Vector<Int16>((ulong)BitConverter.DoubleToInt64Bits(value._double), true);
             }
             else
             {
-                result._ulong = value._ulong;
+                return new Vector<Int16>(value._ulong, true);
             }
-            return result;
         }
 
         /// <summary>
@@ -1450,16 +1449,14 @@ namespace System.Numerics
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
         public static explicit operator Vector<UInt32>(Vector<T> value)
         {
-            var result = new Vector<UInt32>();
             if (typeof(T) == typeof(Double))
             {
-                result._ulong = (ulong)BitConverter.DoubleToInt64Bits(value._double);
+                return new Vector<UInt32>((ulong)BitConverter.DoubleToInt64Bits(value._double), true);
             }
             else
             {
-                result._ulong = value._ulong;
+                return new Vector<UInt32>(value._ulong, true);
             }
-            return result;
         }
 
         /// <summary>
@@ -1471,16 +1468,14 @@ namespace System.Numerics
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
         public static explicit operator Vector<Int32>(Vector<T> value)
         {
-            var result = new Vector<Int32>();
             if (typeof(T) == typeof(Double))
             {
-                result._ulong = (ulong)BitConverter.DoubleToInt64Bits(value._double);
+                return new Vector<Int32>((ulong)BitConverter.DoubleToInt64Bits(value._double), true);
             }
             else
             {
-                result._ulong = value._ulong;
+                return new Vector<Int32>(value._ulong, true);
             }
-            return result;
         }
 
         /// <summary>
@@ -1493,16 +1488,14 @@ namespace System.Numerics
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
         public static explicit operator Vector<UInt64>(Vector<T> value)
         {
-            var result = new Vector<UInt64>();
             if (typeof(T) == typeof(Double))
             {
-                result._ulong = (ulong)BitConverter.DoubleToInt64Bits(value._double);
+                return new Vector<UInt64>((ulong)BitConverter.DoubleToInt64Bits(value._double), true);
             }
             else
             {
-                result._ulong = value._ulong;
+                return new Vector<UInt64>(value._ulong, true);
             }
-            return result;
         }
 
         /// <summary>
@@ -1514,16 +1507,14 @@ namespace System.Numerics
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
         public static explicit operator Vector<Int64>(Vector<T> value)
         {
-            var result = new Vector<Int64>();
             if (typeof(T) == typeof(Double))
             {
-                result._ulong = (ulong)BitConverter.DoubleToInt64Bits(value._double);
+                return new Vector<Int64>((ulong)BitConverter.DoubleToInt64Bits(value._double), true);
             }
             else
             {
-                result._ulong = value._ulong;
+                return new Vector<Int64>(value._ulong, true);
             }
-            return result;
         }
 
         /// <summary>
@@ -1535,16 +1526,14 @@ namespace System.Numerics
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
         public static explicit operator Vector<Single>(Vector<T> value)
         {
-            var result = new Vector<Single>();
             if (typeof(T) == typeof(Double))
             {
-                result._ulong = (ulong)BitConverter.DoubleToInt64Bits(value._double);
+                return new Vector<Single>((ulong)BitConverter.DoubleToInt64Bits(value._double), true);
             }
             else
             {
-                result._ulong = value._ulong;
+                return new Vector<Single>(value._ulong, true);
             }
-            return result;
         }
 
         /// <summary>
@@ -1556,16 +1545,14 @@ namespace System.Numerics
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
         public static explicit operator Vector<Double>(Vector<T> value)
         {
-            var result = new Vector<Double>();
             if (typeof(T) == typeof(Double))
             {
-                result._double = value._double;
+                return new Vector<Double>(value._double, true);
             }
             else
             {
-                result._double = BitConverter.Int64BitsToDouble((long)value._ulong);
+                return new Vector<Double>(BitConverter.Int64BitsToDouble((long)value._ulong), true);
             }
-            return result;
         }
 
         #endregion Conversions
@@ -1583,53 +1570,53 @@ namespace System.Numerics
             {
                 ulong left_ulong;
                 ulong right_ulong;
-                Vector<T> result = new Vector<T>();
                 if ((typeof(T) == typeof(Byte)) || (typeof(T) == typeof(SByte)))
                 {
                     left_ulong = left._ulong;
                     right_ulong = right._ulong;
-                    result._ulong = (((left_ulong & 0x00000000000000ffUL) == (left_ulong & 0x00000000000000ffUL)) ? 0x00000000000000ffUL : 0UL)
+                    return new Vector<T>((((left_ulong & 0x00000000000000ffUL) == (left_ulong & 0x00000000000000ffUL)) ? 0x00000000000000ffUL : 0UL)
                                   | (((left_ulong & 0x000000000000ff00UL) == (left_ulong & 0x000000000000ff00UL)) ? 0x000000000000ff00UL : 0UL)
                                   | (((left_ulong & 0x0000000000ff0000UL) == (left_ulong & 0x0000000000ff0000UL)) ? 0x0000000000ff0000UL : 0UL)
                                   | (((left_ulong & 0x00000000ff000000UL) == (left_ulong & 0x00000000ff000000UL)) ? 0x00000000ff000000UL : 0UL)
                                   | (((left_ulong & 0x000000ff00000000UL) == (left_ulong & 0x000000ff00000000UL)) ? 0x000000ff00000000UL : 0UL)
                                   | (((left_ulong & 0x0000ff0000000000UL) == (left_ulong & 0x0000ff0000000000UL)) ? 0x0000ff0000000000UL : 0UL)
                                   | (((left_ulong & 0x00ff000000000000UL) == (left_ulong & 0x00ff000000000000UL)) ? 0x00ff000000000000UL : 0UL)
-                                  | (((left_ulong & 0xff00000000000000UL) == (left_ulong & 0xff00000000000000UL)) ? 0xff00000000000000UL : 0UL);
+                                  | (((left_ulong & 0xff00000000000000UL) == (left_ulong & 0xff00000000000000UL)) ? 0xff00000000000000UL : 0UL), true);
                 }
                 else if ((typeof(T) == typeof(UInt16)) || (typeof(T) == typeof(Int16)))
                 {
                     left_ulong = left._ulong;
                     right_ulong = right._ulong;
-                    result._ulong = (((left_ulong & 0x000000000000ffffUL) == (left_ulong & 0x000000000000ffffUL)) ? 0x000000000000ffffUL : 0UL)
+                    return new Vector<T>((((left_ulong & 0x000000000000ffffUL) == (left_ulong & 0x000000000000ffffUL)) ? 0x000000000000ffffUL : 0UL)
                                   | (((left_ulong & 0x00000000ffff0000UL) == (left_ulong & 0x00000000ffff0000UL)) ? 0x00000000ffff0000UL : 0UL)
                                   | (((left_ulong & 0x0000ffff00000000UL) == (left_ulong & 0x0000ffff00000000UL)) ? 0x0000ffff00000000UL : 0UL)
-                                  | (((left_ulong & 0xffff000000000000UL) == (left_ulong & 0xffff000000000000UL)) ? 0xffff000000000000UL : 0UL);
+                                  | (((left_ulong & 0xffff000000000000UL) == (left_ulong & 0xffff000000000000UL)) ? 0xffff000000000000UL : 0UL), true);
                 }
                 else if ((typeof(T) == typeof(UInt32)) || (typeof(T) == typeof(Int32)))
                 {
                     left_ulong = left._ulong;
                     right_ulong = right._ulong;
-                    result._ulong = (((left_ulong & 0x00000000ffffffffUL) == (left_ulong & 0x00000000ffffffffUL)) ? 0x00000000ffffffffUL : 0UL)
-                                  | (((left_ulong & 0xffffffff00000000UL) == (left_ulong & 0xffffffff00000000UL)) ? 0xffffffff00000000UL : 0UL);
+                    return new Vector<T>((((left_ulong & 0x00000000ffffffffUL) == (left_ulong & 0x00000000ffffffffUL)) ? 0x00000000ffffffffUL : 0UL)
+                                  | (((left_ulong & 0xffffffff00000000UL) == (left_ulong & 0xffffffff00000000UL)) ? 0xffffffff00000000UL : 0UL), true);
                 }
                 else if ((typeof(T) == typeof(UInt64)) || (typeof(T) == typeof(Int64)))
                 {
-                    result._ulong = (left._ulong == right._ulong ? 0xffffffffffffffffUL : 0UL);
+                    return new Vector<T>((left._ulong == right._ulong ? 0xffffffffffffffffUL : 0UL), true);
                 }
                 else if (typeof(T) == typeof(Single))
                 {
                     throwNotYetImplemented();
+                    return new Vector<T>();
                 }
                 else if (typeof(T) == typeof(Double))
                 {
-                    result._double = BitConverter.Int64BitsToDouble(left._double == right._double ? ~0L : 0L);
+                    return new Vector<T>(BitConverter.Int64BitsToDouble(left._double == right._double ? ~0L : 0L), true);
                 }
                 else
                 {
                     throwNotSupported();
+                    return new Vector<T>();
                 }
-                return result;
             }
         }
 
@@ -1645,86 +1632,86 @@ namespace System.Numerics
             {
                 ulong left_ulong;
                 ulong right_ulong;
-                Vector<T> result = new Vector<T>();
                 if (typeof(T) == typeof(Byte))
                 {
                     left_ulong = left._ulong;
                     right_ulong = right._ulong;
-                    result._ulong = ((Byte)(left_ulong >> 00) < (Byte)(right_ulong >> 00) ? 0x00000000000000ffUL : 0UL)
+                    return new Vector<T>(((Byte)(left_ulong >> 00) < (Byte)(right_ulong >> 00) ? 0x00000000000000ffUL : 0UL)
                                   | ((Byte)(left_ulong >> 08) < (Byte)(right_ulong >> 08) ? 0x000000000000ff00UL : 0UL)
                                   | ((Byte)(left_ulong >> 16) < (Byte)(right_ulong >> 16) ? 0x0000000000ff0000UL : 0UL)
                                   | ((Byte)(left_ulong >> 24) < (Byte)(right_ulong >> 24) ? 0x00000000ff000000UL : 0UL)
                                   | ((Byte)(left_ulong >> 32) < (Byte)(right_ulong >> 32) ? 0x000000ff00000000UL : 0UL)
                                   | ((Byte)(left_ulong >> 40) < (Byte)(right_ulong >> 40) ? 0x0000ff0000000000UL : 0UL)
                                   | ((Byte)(left_ulong >> 48) < (Byte)(right_ulong >> 48) ? 0x00ff000000000000UL : 0UL)
-                                  | ((Byte)(left_ulong >> 56) < (Byte)(right_ulong >> 56) ? 0xff00000000000000UL : 0UL);
+                                  | ((Byte)(left_ulong >> 56) < (Byte)(right_ulong >> 56) ? 0xff00000000000000UL : 0UL), true);
                 }
                 else if (typeof(T) == typeof(SByte))
                 {
                     left_ulong = left._ulong;
                     right_ulong = right._ulong;
-                    result._ulong = ((SByte)(left_ulong >> 00) < (SByte)(right_ulong >> 00) ? 0x00000000000000ffUL : 0UL)
+                    return new Vector<T>(((SByte)(left_ulong >> 00) < (SByte)(right_ulong >> 00) ? 0x00000000000000ffUL : 0UL)
                                   | ((SByte)(left_ulong >> 08) < (SByte)(right_ulong >> 08) ? 0x000000000000ff00UL : 0UL)
                                   | ((SByte)(left_ulong >> 16) < (SByte)(right_ulong >> 16) ? 0x0000000000ff0000UL : 0UL)
                                   | ((SByte)(left_ulong >> 24) < (SByte)(right_ulong >> 24) ? 0x00000000ff000000UL : 0UL)
                                   | ((SByte)(left_ulong >> 32) < (SByte)(right_ulong >> 32) ? 0x000000ff00000000UL : 0UL)
                                   | ((SByte)(left_ulong >> 40) < (SByte)(right_ulong >> 40) ? 0x0000ff0000000000UL : 0UL)
                                   | ((SByte)(left_ulong >> 48) < (SByte)(right_ulong >> 48) ? 0x00ff000000000000UL : 0UL)
-                                  | ((SByte)(left_ulong >> 56) < (SByte)(right_ulong >> 56) ? 0xff00000000000000UL : 0UL);
+                                  | ((SByte)(left_ulong >> 56) < (SByte)(right_ulong >> 56) ? 0xff00000000000000UL : 0UL), true);
                 }
                 else if (typeof(T) == typeof(UInt16))
                 {
                     left_ulong = left._ulong;
                     right_ulong = right._ulong;
-                    result._ulong = ((UInt16)(left_ulong >> 00) < (UInt16)(right_ulong >> 00) ? 0x000000000000ffffUL : 0UL)
+                    return new Vector<T>(((UInt16)(left_ulong >> 00) < (UInt16)(right_ulong >> 00) ? 0x000000000000ffffUL : 0UL)
                                   | ((UInt16)(left_ulong >> 16) < (UInt16)(right_ulong >> 16) ? 0x00000000ffff0000UL : 0UL)
                                   | ((UInt16)(left_ulong >> 32) < (UInt16)(right_ulong >> 32) ? 0x0000ffff00000000UL : 0UL)
-                                  | ((UInt16)(left_ulong >> 48) < (UInt16)(right_ulong >> 48) ? 0xffff000000000000UL : 0UL);
+                                  | ((UInt16)(left_ulong >> 48) < (UInt16)(right_ulong >> 48) ? 0xffff000000000000UL : 0UL), true);
                 }
                 else if (typeof(T) == typeof(Int16))
                 {
                     left_ulong = left._ulong;
                     right_ulong = right._ulong;
-                    result._ulong = ((Int16)(left_ulong >> 00) < (Int16)(right_ulong >> 00) ? 0x000000000000ffffUL : 0UL)
+                    return new Vector<T>(((Int16)(left_ulong >> 00) < (Int16)(right_ulong >> 00) ? 0x000000000000ffffUL : 0UL)
                                   | ((Int16)(left_ulong >> 16) < (Int16)(right_ulong >> 16) ? 0x00000000ffff0000UL : 0UL)
                                   | ((Int16)(left_ulong >> 32) < (Int16)(right_ulong >> 32) ? 0x0000ffff00000000UL : 0UL)
-                                  | ((Int16)(left_ulong >> 48) < (Int16)(right_ulong >> 48) ? 0xffff000000000000UL : 0UL);
+                                  | ((Int16)(left_ulong >> 48) < (Int16)(right_ulong >> 48) ? 0xffff000000000000UL : 0UL), true);
                 }
                 else if (typeof(T) == typeof(UInt32))
                 {
                     left_ulong = left._ulong;
                     right_ulong = right._ulong;
-                    result._ulong = ((UInt32)(left_ulong >> 00) < (UInt32)(right_ulong >> 00) ? 0x00000000ffffffffUL : 0UL)
-                                  | ((UInt32)(left_ulong >> 32) < (UInt32)(right_ulong >> 32) ? 0xffffffff00000000UL : 0UL);
+                    return new Vector<T>(((UInt32)(left_ulong >> 00) < (UInt32)(right_ulong >> 00) ? 0x00000000ffffffffUL : 0UL)
+                                  | ((UInt32)(left_ulong >> 32) < (UInt32)(right_ulong >> 32) ? 0xffffffff00000000UL : 0UL), true);
                 }
                 else if (typeof(T) == typeof(Int32))
                 {
                     left_ulong = left._ulong;
                     right_ulong = right._ulong;
-                    result._ulong = ((Int32)(left_ulong >> 00) < (Int32)(right_ulong >> 00) ? 0x00000000ffffffffUL : 0UL)
-                                  | ((Int32)(left_ulong >> 32) < (Int32)(right_ulong >> 32) ? 0xffffffff00000000UL : 0UL);
+                    return new Vector<T>(((Int32)(left_ulong >> 00) < (Int32)(right_ulong >> 00) ? 0x00000000ffffffffUL : 0UL)
+                                  | ((Int32)(left_ulong >> 32) < (Int32)(right_ulong >> 32) ? 0xffffffff00000000UL : 0UL), true);
                 }
                 else if (typeof(T) == typeof(UInt64))
                 {
-                    result._ulong = (left._ulong < right._ulong ? ~0UL : 0UL);
+                    return new Vector<T>((left._ulong < right._ulong ? ~0UL : 0UL), true);
                 }
                 else if (typeof(T) == typeof(Int64))
                 {
-                    result._ulong = ((long)left._ulong < (long)right._ulong ? ~0UL : 0UL);
+                    return new Vector<T>(((long)left._ulong < (long)right._ulong ? ~0UL : 0UL), true);
                 }
                 else if (typeof(T) == typeof(Single))
                 {
                     throwNotYetImplemented();
+                    return new Vector<T>();
                 }
                 else if (typeof(T) == typeof(Double))
                 {
-                    result._ulong = (left._double < right._double ? ~0UL : 0UL);
+                    return new Vector<T>((left._double < right._double ? ~0UL : 0UL), true);
                 }
                 else
                 {
                     throwNotSupported();
+                    return new Vector<T>();
                 }
-                return result;
             }
         }
 
@@ -1740,86 +1727,86 @@ namespace System.Numerics
             {
                 ulong left_ulong;
                 ulong right_ulong;
-                Vector<T> result = new Vector<T>();
                 if (typeof(T) == typeof(Byte))
                 {
                     left_ulong = left._ulong;
                     right_ulong = right._ulong;
-                    result._ulong = ((Byte)(left_ulong >> 00) > (Byte)(right_ulong >> 00) ? 0x00000000000000ffUL : 0UL)
+                    return new Vector<T>(((Byte)(left_ulong >> 00) > (Byte)(right_ulong >> 00) ? 0x00000000000000ffUL : 0UL)
                                   | ((Byte)(left_ulong >> 08) > (Byte)(right_ulong >> 08) ? 0x000000000000ff00UL : 0UL)
                                   | ((Byte)(left_ulong >> 16) > (Byte)(right_ulong >> 16) ? 0x0000000000ff0000UL : 0UL)
                                   | ((Byte)(left_ulong >> 24) > (Byte)(right_ulong >> 24) ? 0x00000000ff000000UL : 0UL)
                                   | ((Byte)(left_ulong >> 32) > (Byte)(right_ulong >> 32) ? 0x000000ff00000000UL : 0UL)
                                   | ((Byte)(left_ulong >> 40) > (Byte)(right_ulong >> 40) ? 0x0000ff0000000000UL : 0UL)
                                   | ((Byte)(left_ulong >> 48) > (Byte)(right_ulong >> 48) ? 0x00ff000000000000UL : 0UL)
-                                  | ((Byte)(left_ulong >> 56) > (Byte)(right_ulong >> 56) ? 0xff00000000000000UL : 0UL);
+                                  | ((Byte)(left_ulong >> 56) > (Byte)(right_ulong >> 56) ? 0xff00000000000000UL : 0UL), true);
                 }
                 else if (typeof(T) == typeof(SByte))
                 {
                     left_ulong = left._ulong;
                     right_ulong = right._ulong;
-                    result._ulong = ((SByte)(left_ulong >> 00) > (SByte)(right_ulong >> 00) ? 0x00000000000000ffUL : 0UL)
+                    return new Vector<T>(((SByte)(left_ulong >> 00) > (SByte)(right_ulong >> 00) ? 0x00000000000000ffUL : 0UL)
                                   | ((SByte)(left_ulong >> 08) > (SByte)(right_ulong >> 08) ? 0x000000000000ff00UL : 0UL)
                                   | ((SByte)(left_ulong >> 16) > (SByte)(right_ulong >> 16) ? 0x0000000000ff0000UL : 0UL)
                                   | ((SByte)(left_ulong >> 24) > (SByte)(right_ulong >> 24) ? 0x00000000ff000000UL : 0UL)
                                   | ((SByte)(left_ulong >> 32) > (SByte)(right_ulong >> 32) ? 0x000000ff00000000UL : 0UL)
                                   | ((SByte)(left_ulong >> 40) > (SByte)(right_ulong >> 40) ? 0x0000ff0000000000UL : 0UL)
                                   | ((SByte)(left_ulong >> 48) > (SByte)(right_ulong >> 48) ? 0x00ff000000000000UL : 0UL)
-                                  | ((SByte)(left_ulong >> 56) > (SByte)(right_ulong >> 56) ? 0xff00000000000000UL : 0UL);
+                                  | ((SByte)(left_ulong >> 56) > (SByte)(right_ulong >> 56) ? 0xff00000000000000UL : 0UL), true);
                 }
                 else if (typeof(T) == typeof(UInt16))
                 {
                     left_ulong = left._ulong;
                     right_ulong = right._ulong;
-                    result._ulong = ((UInt16)(left_ulong >> 00) > (UInt16)(right_ulong >> 00) ? 0x000000000000ffffUL : 0UL)
+                    return new Vector<T>(((UInt16)(left_ulong >> 00) > (UInt16)(right_ulong >> 00) ? 0x000000000000ffffUL : 0UL)
                                   | ((UInt16)(left_ulong >> 16) > (UInt16)(right_ulong >> 16) ? 0x00000000ffff0000UL : 0UL)
                                   | ((UInt16)(left_ulong >> 32) > (UInt16)(right_ulong >> 32) ? 0x0000ffff00000000UL : 0UL)
-                                  | ((UInt16)(left_ulong >> 48) > (UInt16)(right_ulong >> 48) ? 0xffff000000000000UL : 0UL);
+                                  | ((UInt16)(left_ulong >> 48) > (UInt16)(right_ulong >> 48) ? 0xffff000000000000UL : 0UL), true);
                 }
                 else if (typeof(T) == typeof(Int16))
                 {
                     left_ulong = left._ulong;
                     right_ulong = right._ulong;
-                    result._ulong = ((Int16)(left_ulong >> 00) > (Int16)(right_ulong >> 00) ? 0x000000000000ffffUL : 0UL)
+                    return new Vector<T>(((Int16)(left_ulong >> 00) > (Int16)(right_ulong >> 00) ? 0x000000000000ffffUL : 0UL)
                                   | ((Int16)(left_ulong >> 16) > (Int16)(right_ulong >> 16) ? 0x00000000ffff0000UL : 0UL)
                                   | ((Int16)(left_ulong >> 32) > (Int16)(right_ulong >> 32) ? 0x0000ffff00000000UL : 0UL)
-                                  | ((Int16)(left_ulong >> 48) > (Int16)(right_ulong >> 48) ? 0xffff000000000000UL : 0UL);
+                                  | ((Int16)(left_ulong >> 48) > (Int16)(right_ulong >> 48) ? 0xffff000000000000UL : 0UL), true);
                 }
                 else if (typeof(T) == typeof(UInt32))
                 {
                     left_ulong = left._ulong;
                     right_ulong = right._ulong;
-                    result._ulong = ((UInt32)(left_ulong >> 00) > (UInt32)(right_ulong >> 00) ? 0x00000000ffffffffUL : 0UL)
-                                  | ((UInt32)(left_ulong >> 32) > (UInt32)(right_ulong >> 32) ? 0xffffffff00000000UL : 0UL);
+                    return new Vector<T>(((UInt32)(left_ulong >> 00) > (UInt32)(right_ulong >> 00) ? 0x00000000ffffffffUL : 0UL)
+                                  | ((UInt32)(left_ulong >> 32) > (UInt32)(right_ulong >> 32) ? 0xffffffff00000000UL : 0UL), true);
                 }
                 else if (typeof(T) == typeof(Int32))
                 {
                     left_ulong = left._ulong;
                     right_ulong = right._ulong;
-                    result._ulong = ((Int32)(left_ulong >> 00) > (Int32)(right_ulong >> 00) ? 0x00000000ffffffffUL : 0UL)
-                                  | ((Int32)(left_ulong >> 32) > (Int32)(right_ulong >> 32) ? 0xffffffff00000000UL : 0UL);
+                    return new Vector<T>(((Int32)(left_ulong >> 00) > (Int32)(right_ulong >> 00) ? 0x00000000ffffffffUL : 0UL)
+                                  | ((Int32)(left_ulong >> 32) > (Int32)(right_ulong >> 32) ? 0xffffffff00000000UL : 0UL), true);
                 }
                 else if (typeof(T) == typeof(UInt64))
                 {
-                    result._ulong = (left._ulong > right._ulong ? ~0UL : 0UL);
+                    return new Vector<T>((left._ulong > right._ulong ? ~0UL : 0UL), true);
                 }
                 else if (typeof(T) == typeof(Int64))
                 {
-                    result._ulong = ((long)left._ulong > (long)right._ulong ? ~0UL : 0UL);
+                    return new Vector<T>(((long)left._ulong > (long)right._ulong ? ~0UL : 0UL), true);
                 }
                 else if (typeof(T) == typeof(Single))
                 {
                     throwNotYetImplemented();
+                    return new Vector<T>();
                 }
                 else if (typeof(T) == typeof(Double))
                 {
-                    result._ulong = (left._double > right._double ? ~0UL : 0UL);
+                    return new Vector<T>((left._double > right._double ? ~0UL : 0UL), true);
                 }
                 else
                 {
                     throwNotSupported();
+                    return new Vector<T>();
                 }
-                return result;
             }
         }
 
@@ -1835,86 +1822,86 @@ namespace System.Numerics
             {
                 ulong left_ulong;
                 ulong right_ulong;
-                Vector<T> result = new Vector<T>();
                 if (typeof(T) == typeof(Byte))
                 {
                     left_ulong = left._ulong;
                     right_ulong = right._ulong;
-                    result._ulong = ((Byte)(left_ulong >> 00) >= (Byte)(right_ulong >> 00) ? 0x00000000000000ffUL : 0UL)
+                    return new Vector<T>(((Byte)(left_ulong >> 00) >= (Byte)(right_ulong >> 00) ? 0x00000000000000ffUL : 0UL)
                                   | ((Byte)(left_ulong >> 08) >= (Byte)(right_ulong >> 08) ? 0x000000000000ff00UL : 0UL)
                                   | ((Byte)(left_ulong >> 16) >= (Byte)(right_ulong >> 16) ? 0x0000000000ff0000UL : 0UL)
                                   | ((Byte)(left_ulong >> 24) >= (Byte)(right_ulong >> 24) ? 0x00000000ff000000UL : 0UL)
                                   | ((Byte)(left_ulong >> 32) >= (Byte)(right_ulong >> 32) ? 0x000000ff00000000UL : 0UL)
                                   | ((Byte)(left_ulong >> 40) >= (Byte)(right_ulong >> 40) ? 0x0000ff0000000000UL : 0UL)
                                   | ((Byte)(left_ulong >> 48) >= (Byte)(right_ulong >> 48) ? 0x00ff000000000000UL : 0UL)
-                                  | ((Byte)(left_ulong >> 56) >= (Byte)(right_ulong >> 56) ? 0xff00000000000000UL : 0UL);
+                                  | ((Byte)(left_ulong >> 56) >= (Byte)(right_ulong >> 56) ? 0xff00000000000000UL : 0UL), true);
                 }
                 else if (typeof(T) == typeof(SByte))
                 {
                     left_ulong = left._ulong;
                     right_ulong = right._ulong;
-                    result._ulong = ((SByte)(left_ulong >> 00) >= (SByte)(right_ulong >> 00) ? 0x00000000000000ffUL : 0UL)
+                    return new Vector<T>(((SByte)(left_ulong >> 00) >= (SByte)(right_ulong >> 00) ? 0x00000000000000ffUL : 0UL)
                                   | ((SByte)(left_ulong >> 08) >= (SByte)(right_ulong >> 08) ? 0x000000000000ff00UL : 0UL)
                                   | ((SByte)(left_ulong >> 16) >= (SByte)(right_ulong >> 16) ? 0x0000000000ff0000UL : 0UL)
                                   | ((SByte)(left_ulong >> 24) >= (SByte)(right_ulong >> 24) ? 0x00000000ff000000UL : 0UL)
                                   | ((SByte)(left_ulong >> 32) >= (SByte)(right_ulong >> 32) ? 0x000000ff00000000UL : 0UL)
                                   | ((SByte)(left_ulong >> 40) >= (SByte)(right_ulong >> 40) ? 0x0000ff0000000000UL : 0UL)
                                   | ((SByte)(left_ulong >> 48) >= (SByte)(right_ulong >> 48) ? 0x00ff000000000000UL : 0UL)
-                                  | ((SByte)(left_ulong >> 56) >= (SByte)(right_ulong >> 56) ? 0xff00000000000000UL : 0UL);
+                                  | ((SByte)(left_ulong >> 56) >= (SByte)(right_ulong >> 56) ? 0xff00000000000000UL : 0UL), true);
                 }
                 else if (typeof(T) == typeof(UInt16))
                 {
                     left_ulong = left._ulong;
                     right_ulong = right._ulong;
-                    result._ulong = ((UInt16)(left_ulong >> 00) >= (UInt16)(right_ulong >> 00) ? 0x000000000000ffffUL : 0UL)
+                    return new Vector<T>(((UInt16)(left_ulong >> 00) >= (UInt16)(right_ulong >> 00) ? 0x000000000000ffffUL : 0UL)
                                   | ((UInt16)(left_ulong >> 16) >= (UInt16)(right_ulong >> 16) ? 0x00000000ffff0000UL : 0UL)
                                   | ((UInt16)(left_ulong >> 32) >= (UInt16)(right_ulong >> 32) ? 0x0000ffff00000000UL : 0UL)
-                                  | ((UInt16)(left_ulong >> 48) >= (UInt16)(right_ulong >> 48) ? 0xffff000000000000UL : 0UL);
+                                  | ((UInt16)(left_ulong >> 48) >= (UInt16)(right_ulong >> 48) ? 0xffff000000000000UL : 0UL), true);
                 }
                 else if (typeof(T) == typeof(Int16))
                 {
                     left_ulong = left._ulong;
                     right_ulong = right._ulong;
-                    result._ulong = ((Int16)(left_ulong >> 00) >= (Int16)(right_ulong >> 00) ? 0x000000000000ffffUL : 0UL)
+                    return new Vector<T>(((Int16)(left_ulong >> 00) >= (Int16)(right_ulong >> 00) ? 0x000000000000ffffUL : 0UL)
                                   | ((Int16)(left_ulong >> 16) >= (Int16)(right_ulong >> 16) ? 0x00000000ffff0000UL : 0UL)
                                   | ((Int16)(left_ulong >> 32) >= (Int16)(right_ulong >> 32) ? 0x0000ffff00000000UL : 0UL)
-                                  | ((Int16)(left_ulong >> 48) >= (Int16)(right_ulong >> 48) ? 0xffff000000000000UL : 0UL);
+                                  | ((Int16)(left_ulong >> 48) >= (Int16)(right_ulong >> 48) ? 0xffff000000000000UL : 0UL), true);
                 }
                 else if (typeof(T) == typeof(UInt32))
                 {
                     left_ulong = left._ulong;
                     right_ulong = right._ulong;
-                    result._ulong = ((UInt32)(left_ulong >> 00) >= (UInt32)(right_ulong >> 00) ? 0x00000000ffffffffUL : 0UL)
-                                  | ((UInt32)(left_ulong >> 32) >= (UInt32)(right_ulong >> 32) ? 0xffffffff00000000UL : 0UL);
+                    return new Vector<T>(((UInt32)(left_ulong >> 00) >= (UInt32)(right_ulong >> 00) ? 0x00000000ffffffffUL : 0UL)
+                                  | ((UInt32)(left_ulong >> 32) >= (UInt32)(right_ulong >> 32) ? 0xffffffff00000000UL : 0UL), true);
                 }
                 else if (typeof(T) == typeof(Int32))
                 {
                     left_ulong = left._ulong;
                     right_ulong = right._ulong;
-                    result._ulong = ((Int32)(left_ulong >> 00) >= (Int32)(right_ulong >> 00) ? 0x00000000ffffffffUL : 0UL)
-                                  | ((Int32)(left_ulong >> 32) >= (Int32)(right_ulong >> 32) ? 0xffffffff00000000UL : 0UL);
+                    return new Vector<T>(((Int32)(left_ulong >> 00) >= (Int32)(right_ulong >> 00) ? 0x00000000ffffffffUL : 0UL)
+                                  | ((Int32)(left_ulong >> 32) >= (Int32)(right_ulong >> 32) ? 0xffffffff00000000UL : 0UL), true);
                 }
                 else if (typeof(T) == typeof(UInt64))
                 {
-                    result._ulong = (left._ulong >= right._ulong ? ~0UL : 0UL);
+                    return new Vector<T>((left._ulong >= right._ulong ? ~0UL : 0UL), true);
                 }
                 else if (typeof(T) == typeof(Int64))
                 {
-                    result._ulong = ((long)left._ulong >= (long)right._ulong ? ~0UL : 0UL);
+                    return new Vector<T>(((long)left._ulong >= (long)right._ulong ? ~0UL : 0UL), true);
                 }
                 else if (typeof(T) == typeof(Single))
                 {
                     throwNotYetImplemented();
+                    return new Vector<T>();
                 }
                 else if (typeof(T) == typeof(Double))
                 {
-                    result._ulong = (left._double >= right._double ? ~0UL : 0UL);
+                    return new Vector<T>((left._double >= right._double ? ~0UL : 0UL), true);
                 }
                 else
                 {
                     throwNotSupported();
+                    return new Vector<T>();
                 }
-                return result;
             }
         }
 
@@ -1930,86 +1917,86 @@ namespace System.Numerics
             {
                 ulong left_ulong;
                 ulong right_ulong;
-                Vector<T> result = new Vector<T>();
                 if (typeof(T) == typeof(Byte))
                 {
                     left_ulong = left._ulong;
                     right_ulong = right._ulong;
-                    result._ulong = ((Byte)(left_ulong >> 00) <= (Byte)(right_ulong >> 00) ? 0x00000000000000ffUL : 0UL)
+                    return new Vector<T>(((Byte)(left_ulong >> 00) <= (Byte)(right_ulong >> 00) ? 0x00000000000000ffUL : 0UL)
                                   | ((Byte)(left_ulong >> 08) <= (Byte)(right_ulong >> 08) ? 0x000000000000ff00UL : 0UL)
                                   | ((Byte)(left_ulong >> 16) <= (Byte)(right_ulong >> 16) ? 0x0000000000ff0000UL : 0UL)
                                   | ((Byte)(left_ulong >> 24) <= (Byte)(right_ulong >> 24) ? 0x00000000ff000000UL : 0UL)
                                   | ((Byte)(left_ulong >> 32) <= (Byte)(right_ulong >> 32) ? 0x000000ff00000000UL : 0UL)
                                   | ((Byte)(left_ulong >> 40) <= (Byte)(right_ulong >> 40) ? 0x0000ff0000000000UL : 0UL)
                                   | ((Byte)(left_ulong >> 48) <= (Byte)(right_ulong >> 48) ? 0x00ff000000000000UL : 0UL)
-                                  | ((Byte)(left_ulong >> 56) <= (Byte)(right_ulong >> 56) ? 0xff00000000000000UL : 0UL);
+                                  | ((Byte)(left_ulong >> 56) <= (Byte)(right_ulong >> 56) ? 0xff00000000000000UL : 0UL), true);
                 }
                 else if (typeof(T) == typeof(SByte))
                 {
                     left_ulong = left._ulong;
                     right_ulong = right._ulong;
-                    result._ulong = ((SByte)(left_ulong >> 00) <= (SByte)(right_ulong >> 00) ? 0x00000000000000ffUL : 0UL)
+                    return new Vector<T>(((SByte)(left_ulong >> 00) <= (SByte)(right_ulong >> 00) ? 0x00000000000000ffUL : 0UL)
                                   | ((SByte)(left_ulong >> 08) <= (SByte)(right_ulong >> 08) ? 0x000000000000ff00UL : 0UL)
                                   | ((SByte)(left_ulong >> 16) <= (SByte)(right_ulong >> 16) ? 0x0000000000ff0000UL : 0UL)
                                   | ((SByte)(left_ulong >> 24) <= (SByte)(right_ulong >> 24) ? 0x00000000ff000000UL : 0UL)
                                   | ((SByte)(left_ulong >> 32) <= (SByte)(right_ulong >> 32) ? 0x000000ff00000000UL : 0UL)
                                   | ((SByte)(left_ulong >> 40) <= (SByte)(right_ulong >> 40) ? 0x0000ff0000000000UL : 0UL)
                                   | ((SByte)(left_ulong >> 48) <= (SByte)(right_ulong >> 48) ? 0x00ff000000000000UL : 0UL)
-                                  | ((SByte)(left_ulong >> 56) <= (SByte)(right_ulong >> 56) ? 0xff00000000000000UL : 0UL);
+                                  | ((SByte)(left_ulong >> 56) <= (SByte)(right_ulong >> 56) ? 0xff00000000000000UL : 0UL), true);
                 }
                 else if (typeof(T) == typeof(UInt16))
                 {
                     left_ulong = left._ulong;
                     right_ulong = right._ulong;
-                    result._ulong = ((UInt16)(left_ulong >> 00) <= (UInt16)(right_ulong >> 00) ? 0x000000000000ffffUL : 0UL)
+                    return new Vector<T>(((UInt16)(left_ulong >> 00) <= (UInt16)(right_ulong >> 00) ? 0x000000000000ffffUL : 0UL)
                                   | ((UInt16)(left_ulong >> 16) <= (UInt16)(right_ulong >> 16) ? 0x00000000ffff0000UL : 0UL)
                                   | ((UInt16)(left_ulong >> 32) <= (UInt16)(right_ulong >> 32) ? 0x0000ffff00000000UL : 0UL)
-                                  | ((UInt16)(left_ulong >> 48) <= (UInt16)(right_ulong >> 48) ? 0xffff000000000000UL : 0UL);
+                                  | ((UInt16)(left_ulong >> 48) <= (UInt16)(right_ulong >> 48) ? 0xffff000000000000UL : 0UL), true);
                 }
                 else if (typeof(T) == typeof(Int16))
                 {
                     left_ulong = left._ulong;
                     right_ulong = right._ulong;
-                    result._ulong = ((Int16)(left_ulong >> 00) <= (Int16)(right_ulong >> 00) ? 0x000000000000ffffUL : 0UL)
+                    return new Vector<T>(((Int16)(left_ulong >> 00) <= (Int16)(right_ulong >> 00) ? 0x000000000000ffffUL : 0UL)
                                   | ((Int16)(left_ulong >> 16) <= (Int16)(right_ulong >> 16) ? 0x00000000ffff0000UL : 0UL)
                                   | ((Int16)(left_ulong >> 32) <= (Int16)(right_ulong >> 32) ? 0x0000ffff00000000UL : 0UL)
-                                  | ((Int16)(left_ulong >> 48) <= (Int16)(right_ulong >> 48) ? 0xffff000000000000UL : 0UL);
+                                  | ((Int16)(left_ulong >> 48) <= (Int16)(right_ulong >> 48) ? 0xffff000000000000UL : 0UL), true);
                 }
                 else if (typeof(T) == typeof(UInt32))
                 {
                     left_ulong = left._ulong;
                     right_ulong = right._ulong;
-                    result._ulong = ((UInt32)(left_ulong >> 00) <= (UInt32)(right_ulong >> 00) ? 0x00000000ffffffffUL : 0UL)
-                                  | ((UInt32)(left_ulong >> 32) <= (UInt32)(right_ulong >> 32) ? 0xffffffff00000000UL : 0UL);
+                    return new Vector<T>(((UInt32)(left_ulong >> 00) <= (UInt32)(right_ulong >> 00) ? 0x00000000ffffffffUL : 0UL)
+                                  | ((UInt32)(left_ulong >> 32) <= (UInt32)(right_ulong >> 32) ? 0xffffffff00000000UL : 0UL), true);
                 }
                 else if (typeof(T) == typeof(Int32))
                 {
                     left_ulong = left._ulong;
                     right_ulong = right._ulong;
-                    result._ulong = ((Int32)(left_ulong >> 00) <= (Int32)(right_ulong >> 00) ? 0x00000000ffffffffUL : 0UL)
-                                  | ((Int32)(left_ulong >> 32) <= (Int32)(right_ulong >> 32) ? 0xffffffff00000000UL : 0UL);
+                    return new Vector<T>(((Int32)(left_ulong >> 00) <= (Int32)(right_ulong >> 00) ? 0x00000000ffffffffUL : 0UL)
+                                  | ((Int32)(left_ulong >> 32) <= (Int32)(right_ulong >> 32) ? 0xffffffff00000000UL : 0UL), true);
                 }
                 else if (typeof(T) == typeof(UInt64))
                 {
-                    result._ulong = (left._ulong <= right._ulong ? ~0UL : 0UL);
+                    return new Vector<T>((left._ulong <= right._ulong ? ~0UL : 0UL), true);
                 }
                 else if (typeof(T) == typeof(Int64))
                 {
-                    result._ulong = ((long)left._ulong <= (long)right._ulong ? ~0UL : 0UL);
+                    return new Vector<T>(((long)left._ulong <= (long)right._ulong ? ~0UL : 0UL), true);
                 }
                 else if (typeof(T) == typeof(Single))
                 {
                     throwNotYetImplemented();
+                    return new Vector<T>();
                 }
                 else if (typeof(T) == typeof(Double))
                 {
-                    result._ulong = (left._double <= right._double ? ~0UL : 0UL);
+                    return new Vector<T>((left._double <= right._double ? ~0UL : 0UL), true);
                 }
                 else
                 {
                     throwNotSupported();
+                    return new Vector<T>();
                 }
-                return result;
             }
         }
 
@@ -2048,50 +2035,50 @@ namespace System.Numerics
             }
             else
             {
-                Vector<T> result = new Vector<T>();
                 if (typeof(T) == typeof(SByte))
                 {
                     var value_ulong = value._ulong;
-                    result._ulong = (((ulong)(Byte)Math.Abs((SByte)(value_ulong >> 00))) << 00)
+                    return new Vector<T>((((ulong)(Byte)Math.Abs((SByte)(value_ulong >> 00))) << 00)
                                   | (((ulong)(Byte)Math.Abs((SByte)(value_ulong >> 08))) << 08)
                                   | (((ulong)(Byte)Math.Abs((SByte)(value_ulong >> 16))) << 16)
                                   | (((ulong)(Byte)Math.Abs((SByte)(value_ulong >> 24))) << 24)
                                   | (((ulong)(Byte)Math.Abs((SByte)(value_ulong >> 32))) << 32)
                                   | (((ulong)(Byte)Math.Abs((SByte)(value_ulong >> 40))) << 40)
                                   | (((ulong)(Byte)Math.Abs((SByte)(value_ulong >> 48))) << 48)
-                                  | (((ulong)(Byte)Math.Abs((SByte)(value_ulong >> 56))) << 56);
+                                  | (((ulong)(Byte)Math.Abs((SByte)(value_ulong >> 56))) << 56), true);
                 }
                 else if (typeof(T) == typeof(Int16))
                 {
                     var value_ulong = value._ulong;
-                    result._ulong = (((ulong)(UInt16)Math.Abs((Int16)(value_ulong >> 00))) << 00)
+                    return new Vector<T>((((ulong)(UInt16)Math.Abs((Int16)(value_ulong >> 00))) << 00)
                                   | (((ulong)(UInt16)Math.Abs((Int16)(value_ulong >> 16))) << 16)
                                   | (((ulong)(UInt16)Math.Abs((Int16)(value_ulong >> 32))) << 32)
-                                  | (((ulong)(UInt16)Math.Abs((Int16)(value_ulong >> 48))) << 48);
+                                  | (((ulong)(UInt16)Math.Abs((Int16)(value_ulong >> 48))) << 48), true);
                 }
                 else if (typeof(T) == typeof(Int32))
                 {
                     var value_ulong = value._ulong;
-                    result._ulong = (((ulong)(UInt32)Math.Abs((Int32)(value_ulong >> 00))) << 00)
-                                  | (((ulong)(UInt32)Math.Abs((Int32)(value_ulong >> 32))) << 32);
+                    return new Vector<T>((((ulong)(UInt32)Math.Abs((Int32)(value_ulong >> 00))) << 00)
+                                  | (((ulong)(UInt32)Math.Abs((Int32)(value_ulong >> 32))) << 32), true);
                 }
                 else if (typeof(T) == typeof(Int64))
                 {
-                    result._ulong = (ulong)Math.Abs((Int64)value._ulong);
+                    return new Vector<T>((ulong)Math.Abs((Int64)value._ulong), true);
                 }
                 else if (typeof(T) == typeof(Single))
                 {
                     throwNotYetImplemented();
+                    return new Vector<T>();
                 }
                 else if (typeof(T) == typeof(Double))
                 {
-                    result._double = Math.Abs(value._double);
+                    return new Vector<T>(Math.Abs(value._double), true);
                 }
                 else
                 {
                     throwNotSupported();
+                    return new Vector<T>();
                 }
-                return result;
             }
         }
 
@@ -2107,92 +2094,92 @@ namespace System.Numerics
             {
                 ulong left_ulong;
                 ulong right_ulong;
-                Vector<T> result = new Vector<T>();
                 if (typeof(T) == typeof(Byte))
                 {
                     left_ulong = left._ulong;
                     right_ulong = right._ulong;
-                    result._ulong = (((Byte)(left_ulong >> 00) < (Byte)(right_ulong >> 00) ? left_ulong : right_ulong) & 0x00000000000000ffUL)
+                    return new Vector<T>((((Byte)(left_ulong >> 00) < (Byte)(right_ulong >> 00) ? left_ulong : right_ulong) & 0x00000000000000ffUL)
                                   | (((Byte)(left_ulong >> 08) < (Byte)(right_ulong >> 08) ? left_ulong : right_ulong) & 0x000000000000ff00UL)
                                   | (((Byte)(left_ulong >> 16) < (Byte)(right_ulong >> 16) ? left_ulong : right_ulong) & 0x0000000000ff0000UL)
                                   | (((Byte)(left_ulong >> 24) < (Byte)(right_ulong >> 24) ? left_ulong : right_ulong) & 0x00000000ff000000UL)
                                   | (((Byte)(left_ulong >> 32) < (Byte)(right_ulong >> 32) ? left_ulong : right_ulong) & 0x000000ff00000000UL)
                                   | (((Byte)(left_ulong >> 40) < (Byte)(right_ulong >> 40) ? left_ulong : right_ulong) & 0x0000ff0000000000UL)
                                   | (((Byte)(left_ulong >> 48) < (Byte)(right_ulong >> 48) ? left_ulong : right_ulong) & 0x00ff000000000000UL)
-                                  | (((Byte)(left_ulong >> 56) < (Byte)(right_ulong >> 56) ? left_ulong : right_ulong) & 0xff00000000000000UL);
+                                  | (((Byte)(left_ulong >> 56) < (Byte)(right_ulong >> 56) ? left_ulong : right_ulong) & 0xff00000000000000UL), true);
                 }
                 else if (typeof(T) == typeof(SByte))
                 {
                     left_ulong = left._ulong;
                     right_ulong = right._ulong;
-                    result._ulong = (((SByte)(left_ulong >> 00) < (SByte)(right_ulong >> 00) ? left_ulong : right_ulong) & 0x00000000000000ffUL)
+                    return new Vector<T>((((SByte)(left_ulong >> 00) < (SByte)(right_ulong >> 00) ? left_ulong : right_ulong) & 0x00000000000000ffUL)
                                   | (((SByte)(left_ulong >> 08) < (SByte)(right_ulong >> 08) ? left_ulong : right_ulong) & 0x000000000000ff00UL)
                                   | (((SByte)(left_ulong >> 16) < (SByte)(right_ulong >> 16) ? left_ulong : right_ulong) & 0x0000000000ff0000UL)
                                   | (((SByte)(left_ulong >> 24) < (SByte)(right_ulong >> 24) ? left_ulong : right_ulong) & 0x00000000ff000000UL)
                                   | (((SByte)(left_ulong >> 32) < (SByte)(right_ulong >> 32) ? left_ulong : right_ulong) & 0x000000ff00000000UL)
                                   | (((SByte)(left_ulong >> 40) < (SByte)(right_ulong >> 40) ? left_ulong : right_ulong) & 0x0000ff0000000000UL)
                                   | (((SByte)(left_ulong >> 48) < (SByte)(right_ulong >> 48) ? left_ulong : right_ulong) & 0x00ff000000000000UL)
-                                  | (((SByte)(left_ulong >> 56) < (SByte)(right_ulong >> 56) ? left_ulong : right_ulong) & 0xff00000000000000UL);
+                                  | (((SByte)(left_ulong >> 56) < (SByte)(right_ulong >> 56) ? left_ulong : right_ulong) & 0xff00000000000000UL), true);
                 }
                 else if (typeof(T) == typeof(UInt16))
                 {
                     left_ulong = left._ulong;
                     right_ulong = right._ulong;
-                    result._ulong = (((UInt16)(left_ulong >> 00) < (UInt16)(right_ulong >> 00) ? left_ulong : right_ulong) & 0x000000000000ffffUL)
+                    return new Vector<T>((((UInt16)(left_ulong >> 00) < (UInt16)(right_ulong >> 00) ? left_ulong : right_ulong) & 0x000000000000ffffUL)
                                   | (((UInt16)(left_ulong >> 16) < (UInt16)(right_ulong >> 16) ? left_ulong : right_ulong) & 0x00000000ffff0000UL)
                                   | (((UInt16)(left_ulong >> 32) < (UInt16)(right_ulong >> 32) ? left_ulong : right_ulong) & 0x0000ffff00000000UL)
-                                  | (((UInt16)(left_ulong >> 48) < (UInt16)(right_ulong >> 48) ? left_ulong : right_ulong) & 0xffff000000000000UL);
+                                  | (((UInt16)(left_ulong >> 48) < (UInt16)(right_ulong >> 48) ? left_ulong : right_ulong) & 0xffff000000000000UL), true);
                 }
                 else if (typeof(T) == typeof(Int16))
                 {
                     left_ulong = left._ulong;
                     right_ulong = right._ulong;
-                    result._ulong = (((Int16)(left_ulong >> 00) < (Int16)(right_ulong >> 00) ? left_ulong : right_ulong) & 0x000000000000ffffUL)
+                    return new Vector<T>((((Int16)(left_ulong >> 00) < (Int16)(right_ulong >> 00) ? left_ulong : right_ulong) & 0x000000000000ffffUL)
                                   | (((Int16)(left_ulong >> 16) < (Int16)(right_ulong >> 16) ? left_ulong : right_ulong) & 0x00000000ffff0000UL)
                                   | (((Int16)(left_ulong >> 32) < (Int16)(right_ulong >> 32) ? left_ulong : right_ulong) & 0x0000ffff00000000UL)
-                                  | (((Int16)(left_ulong >> 48) < (Int16)(right_ulong >> 48) ? left_ulong : right_ulong) & 0xffff000000000000UL);
+                                  | (((Int16)(left_ulong >> 48) < (Int16)(right_ulong >> 48) ? left_ulong : right_ulong) & 0xffff000000000000UL), true);
                 }
                 else if (typeof(T) == typeof(UInt32))
                 {
                     left_ulong = left._ulong;
                     right_ulong = right._ulong;
-                    result._ulong = (((UInt32)(left_ulong >> 00) < (UInt32)(right_ulong >> 00) ? left_ulong : right_ulong) & 0x00000000ffffffffUL)
-                                  | (((UInt32)(left_ulong >> 32) < (UInt32)(right_ulong >> 32) ? left_ulong : right_ulong) & 0xffffffff00000000UL);
+                    return new Vector<T>((((UInt32)(left_ulong >> 00) < (UInt32)(right_ulong >> 00) ? left_ulong : right_ulong) & 0x00000000ffffffffUL)
+                                  | (((UInt32)(left_ulong >> 32) < (UInt32)(right_ulong >> 32) ? left_ulong : right_ulong) & 0xffffffff00000000UL), true);
                 }
                 else if (typeof(T) == typeof(Int32))
                 {
                     left_ulong = left._ulong;
                     right_ulong = right._ulong;
-                    result._ulong = (((Int32)(left_ulong >> 00) < (Int32)(right_ulong >> 00) ? left_ulong : right_ulong) & 0x00000000ffffffffUL)
-                                  | (((Int32)(left_ulong >> 32) < (Int32)(right_ulong >> 32) ? left_ulong : right_ulong) & 0xffffffff00000000UL);
+                    return new Vector<T>((((Int32)(left_ulong >> 00) < (Int32)(right_ulong >> 00) ? left_ulong : right_ulong) & 0x00000000ffffffffUL)
+                                  | (((Int32)(left_ulong >> 32) < (Int32)(right_ulong >> 32) ? left_ulong : right_ulong) & 0xffffffff00000000UL), true);
                 }
                 else if (typeof(T) == typeof(UInt64))
                 {
                     left_ulong = left._ulong;
                     right_ulong = right._ulong;
-                    result._ulong = (left_ulong < right_ulong ? left_ulong : right_ulong);
+                    return new Vector<T>((left_ulong < right_ulong ? left_ulong : right_ulong), true);
                 }
                 else if (typeof(T) == typeof(Int64))
                 {
                     left_ulong = left._ulong;
                     right_ulong = right._ulong;
-                    result._ulong = ((Int64)left_ulong < (Int64)right_ulong ? left_ulong : right_ulong);
+                    return new Vector<T>(((Int64)left_ulong < (Int64)right_ulong ? left_ulong : right_ulong), true);
                 }
                 else if (typeof(T) == typeof(Single))
                 {
                     throwNotYetImplemented();
+                    return new Vector<T>();
                 }
                 else if (typeof(T) == typeof(Double))
                 {
                     var left_double = left._double;
                     var right_double = right._double;
-                    result._double = (left_double < right_double ? left_double : right_double);
+                    return new Vector<T>((left_double < right_double ? left_double : right_double), true);
                 }
                 else
                 {
                     throwNotSupported();
+                    return new Vector<T>();
                 }
-                return result;
             }
         }
 
@@ -2208,92 +2195,92 @@ namespace System.Numerics
             {
                 ulong left_ulong;
                 ulong right_ulong;
-                Vector<T> result = new Vector<T>();
                 if (typeof(T) == typeof(Byte))
                 {
                     left_ulong = left._ulong;
                     right_ulong = right._ulong;
-                    result._ulong = (((Byte)(left_ulong >> 00) > (Byte)(right_ulong >> 00) ? left_ulong : right_ulong) & 0x00000000000000ffUL)
+                    return new Vector<T>((((Byte)(left_ulong >> 00) > (Byte)(right_ulong >> 00) ? left_ulong : right_ulong) & 0x00000000000000ffUL)
                                   | (((Byte)(left_ulong >> 08) > (Byte)(right_ulong >> 08) ? left_ulong : right_ulong) & 0x000000000000ff00UL)
                                   | (((Byte)(left_ulong >> 16) > (Byte)(right_ulong >> 16) ? left_ulong : right_ulong) & 0x0000000000ff0000UL)
                                   | (((Byte)(left_ulong >> 24) > (Byte)(right_ulong >> 24) ? left_ulong : right_ulong) & 0x00000000ff000000UL)
                                   | (((Byte)(left_ulong >> 32) > (Byte)(right_ulong >> 32) ? left_ulong : right_ulong) & 0x000000ff00000000UL)
                                   | (((Byte)(left_ulong >> 40) > (Byte)(right_ulong >> 40) ? left_ulong : right_ulong) & 0x0000ff0000000000UL)
                                   | (((Byte)(left_ulong >> 48) > (Byte)(right_ulong >> 48) ? left_ulong : right_ulong) & 0x00ff000000000000UL)
-                                  | (((Byte)(left_ulong >> 56) > (Byte)(right_ulong >> 56) ? left_ulong : right_ulong) & 0xff00000000000000UL);
+                                  | (((Byte)(left_ulong >> 56) > (Byte)(right_ulong >> 56) ? left_ulong : right_ulong) & 0xff00000000000000UL), true);
                 }
                 else if (typeof(T) == typeof(SByte))
                 {
                     left_ulong = left._ulong;
                     right_ulong = right._ulong;
-                    result._ulong = (((SByte)(left_ulong >> 00) > (SByte)(right_ulong >> 00) ? left_ulong : right_ulong) & 0x00000000000000ffUL)
+                    return new Vector<T>((((SByte)(left_ulong >> 00) > (SByte)(right_ulong >> 00) ? left_ulong : right_ulong) & 0x00000000000000ffUL)
                                   | (((SByte)(left_ulong >> 08) > (SByte)(right_ulong >> 08) ? left_ulong : right_ulong) & 0x000000000000ff00UL)
                                   | (((SByte)(left_ulong >> 16) > (SByte)(right_ulong >> 16) ? left_ulong : right_ulong) & 0x0000000000ff0000UL)
                                   | (((SByte)(left_ulong >> 24) > (SByte)(right_ulong >> 24) ? left_ulong : right_ulong) & 0x00000000ff000000UL)
                                   | (((SByte)(left_ulong >> 32) > (SByte)(right_ulong >> 32) ? left_ulong : right_ulong) & 0x000000ff00000000UL)
                                   | (((SByte)(left_ulong >> 40) > (SByte)(right_ulong >> 40) ? left_ulong : right_ulong) & 0x0000ff0000000000UL)
                                   | (((SByte)(left_ulong >> 48) > (SByte)(right_ulong >> 48) ? left_ulong : right_ulong) & 0x00ff000000000000UL)
-                                  | (((SByte)(left_ulong >> 56) > (SByte)(right_ulong >> 56) ? left_ulong : right_ulong) & 0xff00000000000000UL);
+                                  | (((SByte)(left_ulong >> 56) > (SByte)(right_ulong >> 56) ? left_ulong : right_ulong) & 0xff00000000000000UL), true);
                 }
                 else if (typeof(T) == typeof(UInt16))
                 {
                     left_ulong = left._ulong;
                     right_ulong = right._ulong;
-                    result._ulong = (((UInt16)(left_ulong >> 00) > (UInt16)(right_ulong >> 00) ? left_ulong : right_ulong) & 0x000000000000ffffUL)
+                    return new Vector<T>((((UInt16)(left_ulong >> 00) > (UInt16)(right_ulong >> 00) ? left_ulong : right_ulong) & 0x000000000000ffffUL)
                                   | (((UInt16)(left_ulong >> 16) > (UInt16)(right_ulong >> 16) ? left_ulong : right_ulong) & 0x00000000ffff0000UL)
                                   | (((UInt16)(left_ulong >> 32) > (UInt16)(right_ulong >> 32) ? left_ulong : right_ulong) & 0x0000ffff00000000UL)
-                                  | (((UInt16)(left_ulong >> 48) > (UInt16)(right_ulong >> 48) ? left_ulong : right_ulong) & 0xffff000000000000UL);
+                                  | (((UInt16)(left_ulong >> 48) > (UInt16)(right_ulong >> 48) ? left_ulong : right_ulong) & 0xffff000000000000UL), true);
                 }
                 else if (typeof(T) == typeof(Int16))
                 {
                     left_ulong = left._ulong;
                     right_ulong = right._ulong;
-                    result._ulong = (((Int16)(left_ulong >> 00) > (Int16)(right_ulong >> 00) ? left_ulong : right_ulong) & 0x000000000000ffffUL)
+                    return new Vector<T>((((Int16)(left_ulong >> 00) > (Int16)(right_ulong >> 00) ? left_ulong : right_ulong) & 0x000000000000ffffUL)
                                   | (((Int16)(left_ulong >> 16) > (Int16)(right_ulong >> 16) ? left_ulong : right_ulong) & 0x00000000ffff0000UL)
                                   | (((Int16)(left_ulong >> 32) > (Int16)(right_ulong >> 32) ? left_ulong : right_ulong) & 0x0000ffff00000000UL)
-                                  | (((Int16)(left_ulong >> 48) > (Int16)(right_ulong >> 48) ? left_ulong : right_ulong) & 0xffff000000000000UL);
+                                  | (((Int16)(left_ulong >> 48) > (Int16)(right_ulong >> 48) ? left_ulong : right_ulong) & 0xffff000000000000UL), true);
                 }
                 else if (typeof(T) == typeof(UInt32))
                 {
                     left_ulong = left._ulong;
                     right_ulong = right._ulong;
-                    result._ulong = (((UInt32)(left_ulong >> 00) > (UInt32)(right_ulong >> 00) ? left_ulong : right_ulong) & 0x00000000ffffffffUL)
-                                  | (((UInt32)(left_ulong >> 32) > (UInt32)(right_ulong >> 32) ? left_ulong : right_ulong) & 0xffffffff00000000UL);
+                    return new Vector<T>((((UInt32)(left_ulong >> 00) > (UInt32)(right_ulong >> 00) ? left_ulong : right_ulong) & 0x00000000ffffffffUL)
+                                  | (((UInt32)(left_ulong >> 32) > (UInt32)(right_ulong >> 32) ? left_ulong : right_ulong) & 0xffffffff00000000UL), true);
                 }
                 else if (typeof(T) == typeof(Int32))
                 {
                     left_ulong = left._ulong;
                     right_ulong = right._ulong;
-                    result._ulong = (((Int32)(left_ulong >> 00) > (Int32)(right_ulong >> 00) ? left_ulong : right_ulong) & 0x00000000ffffffffUL)
-                                  | (((Int32)(left_ulong >> 32) > (Int32)(right_ulong >> 32) ? left_ulong : right_ulong) & 0xffffffff00000000UL);
+                    return new Vector<T>((((Int32)(left_ulong >> 00) > (Int32)(right_ulong >> 00) ? left_ulong : right_ulong) & 0x00000000ffffffffUL)
+                                  | (((Int32)(left_ulong >> 32) > (Int32)(right_ulong >> 32) ? left_ulong : right_ulong) & 0xffffffff00000000UL), true);
                 }
                 else if (typeof(T) == typeof(UInt64))
                 {
                     left_ulong = left._ulong;
                     right_ulong = right._ulong;
-                    result._ulong = (left_ulong > right_ulong ? left_ulong : right_ulong);
+                    return new Vector<T>((left_ulong > right_ulong ? left_ulong : right_ulong), true);
                 }
                 else if (typeof(T) == typeof(Int64))
                 {
                     left_ulong = left._ulong;
                     right_ulong = right._ulong;
-                    result._ulong = ((Int64)left_ulong > (Int64)right_ulong ? left_ulong : right_ulong);
+                    return new Vector<T>(((Int64)left_ulong > (Int64)right_ulong ? left_ulong : right_ulong), true);
                 }
                 else if (typeof(T) == typeof(Single))
                 {
                     throwNotYetImplemented();
+                    return new Vector<T>();
                 }
                 else if (typeof(T) == typeof(Double))
                 {
                     var left_double = left._double;
                     var right_double = right._double;
-                    result._double = (left_double > right_double ? left_double : right_double);
+                    return new Vector<T>((left_double > right_double ? left_double : right_double), true);
                 }
                 else
                 {
                     throwNotSupported();
+                    return new Vector<T>();
                 }
-                return result;
             }
         }
 
@@ -2407,80 +2394,80 @@ namespace System.Numerics
             else
             {
                 ulong value_ulong;
-                Vector<T> result = new Vector<T>();
                 if (typeof(T) == typeof(Byte))
                 {
                     value_ulong = value._ulong;
-                    result._ulong = (((ulong)(Byte)Math.Sqrt((Byte)(value_ulong >> 00))) << 00)
+                    return new Vector<T>((((ulong)(Byte)Math.Sqrt((Byte)(value_ulong >> 00))) << 00)
                                   | (((ulong)(Byte)Math.Sqrt((Byte)(value_ulong >> 08))) << 08)
                                   | (((ulong)(Byte)Math.Sqrt((Byte)(value_ulong >> 16))) << 16)
                                   | (((ulong)(Byte)Math.Sqrt((Byte)(value_ulong >> 24))) << 24)
                                   | (((ulong)(Byte)Math.Sqrt((Byte)(value_ulong >> 32))) << 32)
                                   | (((ulong)(Byte)Math.Sqrt((Byte)(value_ulong >> 40))) << 40)
                                   | (((ulong)(Byte)Math.Sqrt((Byte)(value_ulong >> 48))) << 48)
-                                  | (((ulong)(Byte)Math.Sqrt((Byte)(value_ulong >> 56))) << 56);
+                                  | (((ulong)(Byte)Math.Sqrt((Byte)(value_ulong >> 56))) << 56), true);
                 }
                 else if (typeof(T) == typeof(SByte))
                 {
                     value_ulong = value._ulong;
-                    result._ulong = (((ulong)(Byte)(SByte)Math.Sqrt((SByte)(value_ulong >> 00))) << 00)
+                    return new Vector<T>((((ulong)(Byte)(SByte)Math.Sqrt((SByte)(value_ulong >> 00))) << 00)
                                   | (((ulong)(Byte)(SByte)Math.Sqrt((SByte)(value_ulong >> 08))) << 08)
                                   | (((ulong)(Byte)(SByte)Math.Sqrt((SByte)(value_ulong >> 16))) << 16)
                                   | (((ulong)(Byte)(SByte)Math.Sqrt((SByte)(value_ulong >> 24))) << 24)
                                   | (((ulong)(Byte)(SByte)Math.Sqrt((SByte)(value_ulong >> 32))) << 32)
                                   | (((ulong)(Byte)(SByte)Math.Sqrt((SByte)(value_ulong >> 40))) << 40)
                                   | (((ulong)(Byte)(SByte)Math.Sqrt((SByte)(value_ulong >> 48))) << 48)
-                                  | (((ulong)(Byte)(SByte)Math.Sqrt((SByte)(value_ulong >> 56))) << 56);
+                                  | (((ulong)(Byte)(SByte)Math.Sqrt((SByte)(value_ulong >> 56))) << 56), true);
                 }
                 else if (typeof(T) == typeof(UInt16))
                 {
                     value_ulong = value._ulong;
-                    result._ulong = (((ulong)(UInt16)Math.Sqrt((UInt16)(value_ulong >> 00))) << 00)
+                    return new Vector<T>((((ulong)(UInt16)Math.Sqrt((UInt16)(value_ulong >> 00))) << 00)
                                   | (((ulong)(UInt16)Math.Sqrt((UInt16)(value_ulong >> 16))) << 16)
                                   | (((ulong)(UInt16)Math.Sqrt((UInt16)(value_ulong >> 32))) << 32)
-                                  | (((ulong)(UInt16)Math.Sqrt((UInt16)(value_ulong >> 48))) << 48);
+                                  | (((ulong)(UInt16)Math.Sqrt((UInt16)(value_ulong >> 48))) << 48), true);
                 }
                 else if (typeof(T) == typeof(Int16))
                 {
                     value_ulong = value._ulong;
-                    result._ulong = (((ulong)(UInt16)(Int16)Math.Sqrt((Int16)(value_ulong >> 00))) << 00)
+                    return new Vector<T>((((ulong)(UInt16)(Int16)Math.Sqrt((Int16)(value_ulong >> 00))) << 00)
                                   | (((ulong)(UInt16)(Int16)Math.Sqrt((Int16)(value_ulong >> 16))) << 16)
                                   | (((ulong)(UInt16)(Int16)Math.Sqrt((Int16)(value_ulong >> 32))) << 32)
-                                  | (((ulong)(UInt16)(Int16)Math.Sqrt((Int16)(value_ulong >> 48))) << 48);
+                                  | (((ulong)(UInt16)(Int16)Math.Sqrt((Int16)(value_ulong >> 48))) << 48), true);
                 }
                 else if (typeof(T) == typeof(UInt32))
                 {
                     value_ulong = value._ulong;
-                    result._ulong = (((ulong)(UInt32)Math.Sqrt((UInt32)(value_ulong >> 00))) << 00)
-                                  | (((ulong)(UInt32)Math.Sqrt((UInt32)(value_ulong >> 32))) << 32);
+                    return new Vector<T>((((ulong)(UInt32)Math.Sqrt((UInt32)(value_ulong >> 00))) << 00)
+                                  | (((ulong)(UInt32)Math.Sqrt((UInt32)(value_ulong >> 32))) << 32), true);
                 }
                 else if (typeof(T) == typeof(Int32))
                 {
                     value_ulong = value._ulong;
-                    result._ulong = (((ulong)(UInt32)(Int32)Math.Sqrt((Int32)(value_ulong >> 00))) << 00)
-                                  | (((ulong)(UInt32)(Int32)Math.Sqrt((Int32)(value_ulong >> 32))) << 32);
+                    return new Vector<T>((((ulong)(UInt32)(Int32)Math.Sqrt((Int32)(value_ulong >> 00))) << 00)
+                                  | (((ulong)(UInt32)(Int32)Math.Sqrt((Int32)(value_ulong >> 32))) << 32), true);
                 }
                 else if (typeof(T) == typeof(UInt64))
                 {
-                    result._ulong = (UInt64)Math.Sqrt(value._ulong);
+                    return new Vector<T>((UInt64)Math.Sqrt(value._ulong), true);
                 }
                 else if (typeof(T) == typeof(Int64))
                 {
-                    result._ulong = (ulong)(Int64)Math.Sqrt((Int64)value._ulong);
+                    return new Vector<T>((ulong)(Int64)Math.Sqrt((Int64)value._ulong), true);
                 }
                 else if (typeof(T) == typeof(Single))
                 {
                     throwNotYetImplemented();
+                    return new Vector<T>();
                 }
                 else if (typeof(T) == typeof(Double))
                 {
-                    value._double = Math.Sqrt(value._double);
+                    return new Vector<T>(Math.Sqrt(value._double), true);
                 }
                 else
                 {
                     throwNotSupported();
+                    return new Vector<T>();
                 }
-                return result;
             }
         }
         #endregion Internal Math Methods
